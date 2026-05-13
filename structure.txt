@@ -1,0 +1,237 @@
+linuxcore/
+│
+├── core/
+├── domains/
+├── technologies/
+├── commands/
+├── protocols/
+├── services/
+├── kernel/
+├── scripting/
+├── security/
+├── virtualization/
+├── containers/
+├── cloud/
+├── hardware/
+├── filesystems/
+├── networking/
+├── observability/
+├── offensive_security/
+├── defensive_security/
+├── forensics/
+├── automation/
+├── infrastructure/
+├── packaging/
+├── distributions/
+├── standards/
+├── internals/
+├── development/
+├── desktop/
+├── multimedia/
+├── embedded/
+├── troubleshooting/
+├── labs/
+├── diagrams/
+├── datasets/
+├── schemas/
+├── templates/
+├── metadata/
+├── generators/
+├── translations/
+└── docs/
+
+
+core/
+├── linux_philosophy/
+├── posix/
+├── gnu/
+├── filesystem_hierarchy_standard/
+├── boot_process/
+├── init_systems/
+├── process_model/
+├── permissions_model/
+├── signals/
+├── scheduling/
+├── memory_management/
+├── ipc/
+├── users_and_groups/
+└── shell_environment/
+
+
+commands/
+├── grep/
+│   ├── command.adoc
+│   ├── examples/
+│   ├── performance/
+│   ├── edge_cases/
+│   ├── internals/
+│   ├── related/
+│   └── metadata.yml
+
+technologies/
+├── nginx/
+├── apache/
+├── systemd/
+├── docker/
+├── kubernetes/
+├── openssh/
+├── nftables/
+├── qemu/
+├── samba/
+├── ldap/
+└── postfix/
+
+nginx/
+├── overview.adoc
+├── architecture.adoc
+├── installation/
+├── configuration/
+├── modules/
+├── performance/
+├── security/
+├── troubleshooting/
+├── examples/
+├── labs/
+└── metadata.yml
+
+```metadata.yml
+name: grep
+category: command
+layer: userspace
+difficulty: beginner
+related:
+  - sed
+  - awk
+  - rg
+tags:
+  - text-processing
+  - regex
+  - filtering
+requires:
+  - regex
+platforms:
+  - linux
+  - macos
+  - bsd
+```
+
+protocols/
+├── tcp/
+├── udp/
+├── dns/
+├── dhcp/
+├── http/
+├── https/
+├── ldap/
+├── snmp/
+├── ssh/
+├── tls/
+├── ntp/
+├── smtp/
+└── smb/
+
+kernel/
+├── syscalls/
+├── modules/
+├── scheduling/
+├── cgroups/
+├── namespaces/
+├── selinux/
+├── apparmor/
+├── seccomp/
+├── ebpf/
+├── procfs/
+├── sysfs/
+├── device_drivers/
+└── memory_management/
+
+filesystems/
+├── ext4/
+├── xfs/
+├── btrfs/
+├── zfs/
+├── f2fs/
+├── tmpfs/
+├── overlayfs/
+├── nfs/
+├── cifs/
+└── fuse/
+
+networking/
+├── routing/
+├── switching/
+├── vlan/
+├── bonding/
+├── bridges/
+├── nat/
+├── vpn/
+├── firewalling/
+├── qos/
+├── wireless/
+└── sdn/
+
+security/
+├── hardening/
+├── auditing/
+├── malware_analysis/
+├── incident_response/
+├── opsec/
+├── threat_hunting/
+├── iam/
+├── pam/
+├── kerberos/
+├── certificates/
+├── tpm/
+├── secure_boot/
+└── cryptography/
+
+troubleshooting/
+├── boot_failures/
+├── memory_issues/
+├── cpu_saturation/
+├── io_bottlenecks/
+├── network_latency/
+├── packet_loss/
+├── dns_failures/
+├── permission_issues/
+├── disk_corruption/
+├── kernel_panics/
+└── service_failures/
+
+labs/
+├── beginner/
+├── intermediate/
+├── advanced/
+├── red_team/
+├── blue_team/
+├── sre/
+├── devops/
+├── kernel/
+└── networking/
+
+Estructura adoc:
+```
+= grep
+
+== Overview
+
+== Syntax
+
+== Parameters
+
+== Common Use Cases
+
+== Examples
+
+== Performance Notes
+
+== Security Implications
+
+== Internals
+
+== Edge Cases
+
+== Related Commands
+
+== References
+```
