@@ -209,29 +209,55 @@ labs/
 ├── kernel/
 └── networking/
 
-Estructura adoc:
+Estructura json:
 ```
-= grep
-
-== Overview
-
-== Syntax
-
-== Parameters
-
-== Common Use Cases
-
-== Examples
-
-== Performance Notes
-
-== Security Implications
-
-== Internals
-
-== Edge Cases
-
-== Related Commands
-
-== References
+{
+  "comando": "ufw",
+  "descripcion": "Uncomplicated Firewall, una interfaz simplificada para gestionar reglas de iptables.",
+  "categoria": "security",
+  "estructura": "ufw [opciones] comando",
+  "opciones": [
+    {
+      "parametro": "enable",
+      "descripcion": "Activa el firewall y lo configura para que inicie con el sistema."
+    },
+    {
+      "parametro": "allow [puerto/protocolo]",
+      "descripcion": "Permite el tráfico entrante (ej: ufw allow 22/tcp)."
+    },
+    {
+      "parametro": "status verbose",
+      "descripcion": "Muestra el estado detallado de las reglas activas."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install ufw -y",
+      "arch_linux": "sudo pacman -S ufw",
+      "rhel_centos": "sudo dnf install ufw -y"
+    }
+  },
+  "relaciones": [
+    {
+      "tema": "Fundamentos de Firewall",
+      "ruta": "/core/permissions_model/en.espera"
+    },
+    {
+      "tema": "Seguridad Defensiva",
+      "ruta": "/defensive_security/en.espera"
+    },
+    {
+      "tema": "Configuración de Red",
+      "ruta": "/networking/protocols/en.espera"
+    }
+  ],
+  "ejemplos": [
+    {
+      "uso": "sudo ufw allow 80/tcp",
+      "explicacion": "Habilita el puerto HTTP para permitir tráfico web."
+    }
+  ]
+}
 ```

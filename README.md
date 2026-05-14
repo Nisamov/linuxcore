@@ -15,12 +15,12 @@
 ---
 
 ## Descripción del Proyecto
-
+Voidreckon
 **LinuxCore** es un repositorio creado a raíz de su predecesor [LinuxCommands](https://github.com/Nisamov/LinuxCommands), con el fin de suplir la ambiciosa finalidad de albergar y ofrecer conocimiento absoluto sobre Linux, no solo con el propósito de sustituir al repositorio previo, sino de consolidar años de experiencia en sistemas Linux, arquitectura, prácticas de seguridad e infraestructuras modernas.
 
 ### Arquitectura del Proyecto
 
-El proyecto genera automáticamente como una base de datos estructurada en formato JSON que permite indexar y consultar determinadas zonas de contenido de manera eficiente. Esta base de datos incluye:
+El proyecto genera automáticamente bases de datos estructuradas en formato JSON que permiten indexar y consultar determinadas zonas de contenido de manera eficiente. Estas bases de datos incluyen:
 
 - **Comandos del Sistema**: Indexación completa de comandos Linux con sintaxis, opciones, ejemplos y casos de uso
 - **Servicios del Sistema**: Documentación de servicios y procesos del sistema
