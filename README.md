@@ -74,7 +74,6 @@ Esta documentación está organizada en los siguientes dominios principales:
 ## Estructura de los comandos
 
 Esta es la estructura del cuerpo de los comandos en formato `json`:
-<!--<img src=".github/media/js_structure.png" alt="Estructura JSON" width="100%">-->
 ```json
 {
   "comando": "commando",
@@ -83,7 +82,7 @@ Esta es la estructura del cuerpo de los comandos en formato `json`:
   "estructura": "comando [opciones] otro",
   "opciones": [
     {
-      "parametro": "h",
+      "parametro": "-h",
       "descripcion": "Muestra la ayuda del comando."
     },
     {
