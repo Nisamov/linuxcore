@@ -6,17 +6,17 @@
 
 **El repositorio definitivo de Linux en Español**
 
-[![MIT License](https://img.shields.io/github/license/Nisamov/linuxcore?style=flat-square)](LICENSE) [![Last Updated](https://img.shields.io/github/last-commit/Nisamov/linuxcore?style=flat-square)](https://github.com/Nisamov/linuxcore/commits) [![Repository Size](https://img.shields.io/github/repo-size/Nisamov/linuxcore?style=flat-square)](.)
+[![MIT License](https://img.shields.io/github/license/nisamov/linuxcore?style=flat-square)](LICENSE) [![Last Updated](https://img.shields.io/github/last-commit/nisamov/linuxcore?style=flat-square)](https://github.com/nisamov/linuxcore/commits) [![Repository Size](https://img.shields.io/github/repo-size/nisamov/linuxcore?style=flat-square)](.)
 
-**Un repositorio creado con la simple finalidad de aprender sin depender de tutoriales genéricos, cursos de pago ni fuentes poco seguras.**
+**Un repositorio creado con la simple finalidad de aprender sin depender de tutoriales genéricos, cursos de pago o fuentes poco seguras.**
 
 </div>
 
 ---
 
 ## Descripción del Proyecto
-Voidreckon
-**LinuxCore** es un repositorio creado a raíz de su predecesor [LinuxCommands](https://github.com/Nisamov/LinuxCommands), con el fin de suplir la ambiciosa finalidad de albergar y ofrecer conocimiento absoluto sobre Linux, no solo con el propósito de sustituir al repositorio previo, sino de consolidar años de experiencia en sistemas Linux, arquitectura, prácticas de seguridad e infraestructuras modernas.
+
+**LinuxCore** es un repositorio creado a raíz de su predecesor [LinuxCommands](https://github.com/nisamov/LinuxCommands), con el fin de suplir la ambiciosa finalidad de albergar y ofrecer conocimiento absoluto sobre Linux, no solo con el propósito de sustituir al repositorio previo, sino de consolidar años de experiencia en sistemas Linux, arquitectura, prácticas de seguridad e infraestructuras modernas.
 
 ### Arquitectura del Proyecto
 
@@ -68,6 +68,53 @@ Esta documentación está organizada en los siguientes dominios principales:
 - **Automatización**: Bash, Python y scripting
 - **Referencia de Comandos**: Herramientas y utilidades esenciales
 - **Guías de Solución de Problemas**: Problemas comunes y soluciones
+
+---
+
+## Estructura de los comandos
+
+Esta es la estructura del cuerpo de los comandos en formato `json`:
+<!--<img src=".github/media/js_structure.png" alt="Estructura JSON" width="100%">-->
+```json
+{
+  "comando": "commando",
+  "descripcion": "Descripcion técnica",
+  "categoria": "categoria interna",
+  "estructura": "comando [opciones] otro",
+  "opciones": [
+    {
+      "parametro": "h",
+      "descripcion": "Muestra la ayuda del comando."
+    },
+    {
+      "parametro": "ejemplo",
+      "descripcion": "Un simple comando de ejemplo."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install comando -y",
+      "arch_linux": "sudo pacman -S comando",
+      "rhel_centos": "sudo dnf install comando -y"
+    }
+  },
+  "relaciones": [
+    {
+      "tema": "Fundamentos de Firewall",
+      "ruta": "/core/permissions_model/ejemplo"
+    }
+  ],
+  "ejemplos": [
+    {
+      "uso": "sudo comando -h",
+      "explicacion": "Muestra por consola la ayuda del comando."
+    }
+  ]
+}
+```
+Estando en este formato, es posible filtras los comandos según sus parámetros, categoría o relaciones internas.
 
 ---
 
