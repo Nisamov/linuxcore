@@ -1,1 +1,109 @@
-{}
+{
+  "comando": "gzip",
+  "descripcion": "Comprimir o descomprimir archivos utilizando la codificación LZ77 (por defecto, comprime los archivos reemplazando el original).",
+  "categoria": ["commands", "compression"],
+  "estructura": "gzip [opciones] [archivo...]",
+  "opciones": [
+    {
+      "parametro": ["-c", "--stdout"],
+      "descripcion": "Escribe el resultado en la salida estándar, manteniendo intactos los archivos originales."
+    },
+    {
+      "parametro": ["-d", "--decompress"],
+      "descripcion": "Descomprime el archivo (equivale a usar el comando gunzip)."
+    },
+    {
+      "parametro": ["-f", "--force"],
+      "descripcion": "Fuerza la sobrescritura de los archivos de salida y permite la compresión de enlaces duros."
+    },
+    {
+      "parametro": ["-h", "--help"],
+      "descripcion": "Muestra la pantalla de ayuda con las opciones disponibles y finaliza."
+    },
+    {
+      "parametro": ["-k", "--keep"],
+      "descripcion": "Conserva los archivos de entrada intactos; no los elimina después de la compresión o descompresión."
+    },
+    {
+      "parametro": ["-l", "--list"],
+      "descripcion": "Muestra información detallada sobre el contenido del archivo comprimido (tamaño original, comprimido, ratio, etc.)."
+    },
+    {
+      "parametro": ["-L", "--license"],
+      "descripcion": "Muestra la licencia de software del programa."
+    },
+    {
+      "parametro": ["-n", "--no-name"],
+      "descripcion": "No guarda ni restaura el nombre original del archivo ni su marca de tiempo al comprimir o descomprimir."
+    },
+    {
+      "parametro": ["-N", "--name"],
+      "descripcion": "Guarda o restaura el nombre original del archivo y su marca de tiempo (comportamiento por defecto al descomprimir)."
+    },
+    {
+      "parametro": ["-q", "--quiet"],
+      "descripcion": "Suprime todos los mensajes de advertencia del sistema."
+    },
+    {
+      "parametro": ["-r", "--recursive"],
+      "descripcion": "Recorre las estructuras de directorios de forma recursiva, comprimiendo o descomprimiendo todos los archivos internos."
+    },
+    {
+      "parametro": ["--rsyncable"],
+      "descripcion": "Optimiza el archivo comprimido para que sea amigable con rsync, facilitando sincronizaciones eficientes."
+    },
+    {
+      "parametro": ["-S [SUF]", "--suffix=[SUF]"],
+      "descripcion": "Utiliza el sufijo personalizado SUF en lugar del formato estándar '.gz' para los archivos comprimidos."
+    },
+    {
+      "parametro": ["--synchronous"],
+      "descripcion": "Fuerza la salida síncrona en el disco, lo cual es más seguro ante caídas del sistema pero reduce la velocidad."
+    },
+    {
+      "parametro": ["-t", "--test"],
+      "descripcion": "Verifica la integridad estructural del archivo comprimido sin llegar a extraerlo."
+    },
+    {
+      "parametro": ["-v", "--verbose"],
+      "descripcion": "Modo detallado; muestra el nombre y el porcentaje de reducción de tamaño para cada archivo procesado."
+    },
+    {
+      "parametro": ["-V", "--version"],
+      "descripcion": "Muestra el número de versión del software instalado."
+    },
+    {
+      "parametro": ["-1", "--fast", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9", "--best"],
+      "descripcion": "Regula el nivel de compresión. '-1' (u '--fast') es la velocidad más rápida con menor compresión, y '-9' (u '--best') ofrece la máxima compresión a menor velocidad."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install gzip -y",
+      "arch_linux": "sudo pacman -S gzip",
+      "rhel_centos": "sudo dnf install gzip -y"
+    }
+  },
+  "relaciones": [
+    {
+      "tema": "",
+      "ruta": ""
+    },
+    {
+      "tema": "",
+      "ruta": ""
+    }
+  ],
+  "ejemplos": [
+    {
+      "uso": "gzip archivo.txt",
+      "explicacion": "Comprime el archivo generando 'archivo.txt.gz' y eliminando el original."
+    },
+    {
+      "uso": "gzip -dk archivo.txt.gz",
+      "explicacion": "Descomprime el archivo '.gz' manteniendo una copia del archivo comprimido original intacta."
+    }
+  ]
+}

@@ -1,1 +1,117 @@
-{}
+{
+  "comando": "rsync",
+  "descripcion": "Una herramienta rápida, versátil y remota (y local) para copiar archivos que minimiza la transferencia de datos mediante el algoritmo de delta-transferencia.",
+  "categoria": ["commands", "compression"],
+  "estructura": "rsync [opciones] origen destino",
+  "opciones": [
+    {
+      "parametro": ["-v", "--verbose"],
+      "descripcion": "Modo detallado; incrementa la cantidad de información que se muestra durante la transferencia."
+    },
+    {
+      "parametro": ["-q", "--quiet"],
+      "descripcion": "Suprime los mensajes que no sean de error, ideal para scripts en segundo plano."
+    },
+    {
+      "parametro": ["-c", "--checksum"],
+      "descripcion": "Fuerza la verificación de archivos mediante sumas de control (hash) en lugar de usar la hora de modificación y el tamaño."
+    },
+    {
+      "parametro": ["-a", "--archive"],
+      "descripcion": "Modo archivo; equivale a usar '-rlptgoD'. Activa la recursividad y preserva enlaces simbólicos, permisos, tiempos, grupos y usuarios."
+    },
+    {
+      "parametro": ["-r", "--recursive"],
+      "descripcion": "Copia directorios de forma recursiva (entra en las subcarpetas)."
+    },
+    {
+      "parametro": ["-b", "--backup"],
+      "descripcion": "Realiza respaldos de los archivos de destino que ya existen agregando un sufijo (por defecto '~') al sobreescribirlos."
+    },
+    {
+      "parametro": ["-u", "--update"],
+      "descripcion": "Omite los archivos que ya están en el destino si son más recientes o tienen el mismo tiempo de modificación."
+    },
+    {
+      "parametro": ["-d", "--dirs"],
+      "descripcion": "Transfiere los directorios sin contenido recursivo, es decir, solo la estructura del directorio especificado."
+    },
+    {
+      "parametro": ["-g", "--group"],
+      "descripcion": "Preserva el grupo del archivo original en el archivo de destino."
+    },
+    {
+      "parametro": ["-o", "--owner"],
+      "descripcion": "Preserva el propietario del archivo original en el archivo de destino (requiere privilegios de superusuario)."
+    },
+    {
+      "parametro": ["-t", "--times"],
+      "descripcion": "Preserva los tiempos de modificación de los archivos transferidos."
+    },
+    {
+      "parametro": ["-n", "--dry-run"],
+      "descripcion": "Realiza una prueba de ejecución simulación de la transferencia sin realizar ningún cambio real en el disco."
+    },
+    {
+      "parametro": ["-H", "--hard-links"],
+      "descripcion": "Preserva los enlaces duros existentes en el origen dentro del destino."
+    },
+    {
+      "parametro": ["-S", "--sparse"],
+      "descripcion": "Optimiza el manejo de archivos dispersos (sparse files) para que consuman menos espacio en el destino."
+    },
+    {
+      "parametro": ["-W", "--whole-file"],
+      "descripcion": "Desactiva el algoritmo de delta-transferencia y copia los archivos completos. Es el comportamiento por defecto en copias locales."
+    },
+    {
+      "parametro": ["-z", "--compress"],
+      "descripcion": "Comprime los datos de los archivos durante la transferencia para reducir el uso de red."
+    },
+    {
+      "parametro": ["--delete"],
+      "descripcion": "Elimina los archivos en el destino que ya no existen en el origen, manteniendo ambos directorios idénticos."
+    },
+    {
+      "parametro": ["--progress"],
+      "descripcion": "Muestra una barra de progreso, la velocidad de transferencia y el tiempo restante para cada archivo."
+    },
+    {
+      "parametro": ["-h", "--help"],
+      "descripcion": "Muestra un mensaje de ayuda con las opciones disponibles y finaliza."
+    },
+    {
+      "parametro": ["--version"],
+      "descripcion": "Muestra la versión del software junto con los términos y condiciones de la licencia."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install rsync -y",
+      "arch_linux": "sudo pacman -S rsync",
+      "rhel_centos": "sudo dnf install rsync -y"
+    }
+  },
+  "relaciones": [
+    {
+      "tema": "cp",
+      "ruta": "commands/files/cp"
+    },
+    {
+      "tema": "scp",
+      "ruta": "commands/network/scp"
+    }
+  ],
+  "ejemplos": [
+    {
+      "uso": "rsync -avz --progress /origen/ /destino/",
+      "explicacion": "Sincroniza el contenido de la carpeta origen en la carpeta destino de forma recursiva, preservando atributos, comprimiendo los datos y mostrando el progreso detallado."
+    },
+    {
+      "uso": "rsync -avz --delete -e ssh /local/ usuario@remoto:/remoto/",
+      "explicacion": "Sincroniza un directorio local con un servidor remoto a través de una conexión segura SSH, eliminando en el destino los archivos que ya no existan en el origen."
+    }
+  ]
+}

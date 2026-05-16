@@ -1,1 +1,85 @@
-{}
+{
+  "comando": "dd",
+  "descripcion": "Copiar un archivo, convirtiendo y formateando según las opciones suministradas.",
+  "categoria": ["commands", "compression"],
+  "estructura": "dd [operandos]",
+  "opciones": [
+    {
+      "parametro": ["if=ARCHIVO"],
+      "descripcion": "Lee desde el ARCHIVO especificado en lugar de la entrada estándar."
+    },
+    {
+      "parametro": ["of=ARCHIVO"],
+      "descripcion": "Escribe en el ARCHIVO especificado en lugar de la salida estándar."
+    },
+    {
+      "parametro": ["bs=BYTES"],
+      "descripcion": "Lee y escribe hasta el número de BYTES especificados a la vez. Reemplaza los valores de 'ibs' y 'obs'."
+    },
+    {
+      "parametro": ["ibs=BYTES"],
+      "descripcion": "Lee la cantidad de BYTES especificados a la vez. Por defecto es 512."
+    },
+    {
+      "parametro": ["obs=BYTES"],
+      "descripcion": "Escribe la cantidad de BYTES especificados a la vez. Por defecto es 512."
+    },
+    {
+      "parametro": ["count=N"],
+      "descripcion": "Copia únicamente N bloques de entrada."
+    },
+    {
+      "parametro": ["skip=N"],
+      "descripcion": "Omite N bloques al principio de la entrada antes de iniciar la copia."
+    },
+    {
+      "parametro": ["seek=N"],
+      "descripcion": "Omite N bloques al principio de la salida antes de iniciar la escritura."
+    },
+    {
+      "parametro": ["conv=CONVS"],
+      "descripcion": "Convierte el archivo según la lista de símbolos separados por comas (ej. 'notrunc', 'noerror', 'sync', 'ucase', 'lcase')."
+    },
+    {
+      "parametro": ["status=NIVEL"],
+      "descripcion": "Controla la cantidad de información transferida mostrada; 'progress' muestra estadísticas en tiempo real, 'none' suprime casi todo."
+    },
+    {
+      "parametro": ["--help"],
+      "descripcion": "Muestra un mensaje de ayuda con las opciones disponibles y finaliza."
+    },
+    {
+      "parametro": ["--version"],
+      "descripcion": "Muestra la versión del software junto con los términos y condiciones de la licencia."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "preinstalado",
+    "pasos": {
+      "debian_ubuntu": "sudo apt install coreutils",
+      "arch_linux": "sudo pacman -S coreutils",
+      "rhel_centos": "sudo dnf install coreutils"
+    }
+  },
+  "relaciones": [
+    {
+      "tema": "cp",
+      "ruta": "commands/utilities/cp"
+    },
+    {
+      "tema": "pv",
+      "ruta": "commands/miscellaneous/pv"
+    }
+  ],
+  "ejemplos": [
+    {
+      "uso": "dd if=origen.iso of=/dev/sdX bs=4M status=progress",
+      "explicacion": "Crea un USB arrancable copiando la imagen ISO al dispositivo /dev/sdX, mostrando el progreso del proceso."
+    },
+    {
+      "uso": "dd if=/dev/sda of=respaldo_mbr.img bs=512 count=1",
+      "explicacion": "Realiza un respaldo del Registro de Arranque Principal (MBR) copiando exactamente los primeros 512 bytes del disco /dev/sda."
+    }
+  ]
+}

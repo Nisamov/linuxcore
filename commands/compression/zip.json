@@ -1,1 +1,93 @@
-{}
+{
+  "comando": "zip",
+  "descripcion": "Empaquetar y comprimir (archivar) archivos en el formato estándar ZIP, compatible con múltiples plataformas.",
+  "categoria": ["commands", "compression"],
+  "estructura": "zip [opciones] archivo.zip [archivos_o_directorios_a_incluir]",
+  "opciones": [
+    {
+      "parametro": ["-r", "--recurse-paths"],
+      "descripcion": "Recorre los directorios de forma recursiva para incluir todos sus subdirectorios y archivos dentro del paquete ZIP."
+    },
+    {
+      "parametro": ["-q", "--quiet"],
+      "descripcion": "Modo silencioso; suprime los mensajes informativos y las líneas de progreso de los archivos que van siendo añadidos."
+    },
+    {
+      "parametro": ["-v", "--verbose"],
+      "descripcion": "Modo detallado o de diagnóstico; muestra información extra sobre la compresión o lista los archivos si no se pasan más argumentos."
+    },
+    {
+      "parametro": ["-m", "--move"],
+      "descripcion": "Mueve los archivos especificados al archivo ZIP; es decir, elimina los archivos originales del disco una vez que se han comprimido con éxito."
+    },
+    {
+      "parametro": ["-u", "--update"],
+      "descripcion": "Actualiza el archivo ZIP reemplazando únicamente los archivos existentes si han cambiado o agregando archivos nuevos."
+    },
+    {
+      "parametro": ["-f", "--freshen"],
+      "descripcion": "Sustituye en el archivo ZIP solo aquellos archivos que ya existen dentro de él y que han sido modificados recientemente en el disco. No añade archivos nuevos."
+    },
+    {
+      "parametro": ["-d", "--delete"],
+      "descripcion": "Elimina de forma explícita los archivos o rutas especificadas que ya se encuentran dentro del archivo ZIP."
+    },
+    {
+      "parametro": ["-j", "--junk-paths"],
+      "descripcion": "Descarta la estructura de rutas de directorios; guarda todos los archivos directamente en la raíz del archivo ZIP sin crear subcarpetas."
+    },
+    {
+      "parametro": ["-e", "--encrypt"],
+      "descripcion": "Solicita una contraseña de forma interactiva en la terminal para cifrar el contenido del archivo ZIP creado."
+    },
+    {
+      "parametro": ["-P", "--password"],
+      "descripcion": "Especifica la contraseña de cifrado directamente desde la línea de comandos (no recomendado por motivos de seguridad)."
+    },
+    {
+      "parametro": ["-0", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9"],
+      "descripcion": "Regula la velocidad y nivel de compresión. '-0' indica almacenar sin compresión, '-1' es el método más rápido y '-9' el método más lento con óptima compresión."
+    },
+    {
+      "parametro": ["-s", "--split-size"],
+      "descripcion": "Divide el archivo ZIP resultante en varias partes más pequeñas del tamaño especificado (ej. '-s 10m' para partes de 10 Megabytes)."
+    },
+    {
+      "parametro": ["-h", "--help"],
+      "descripcion": "Muestra un mensaje de ayuda con las opciones disponibles y finaliza."
+    },
+    {
+      "parametro": ["-v", "--version"],
+      "descripcion": "Muestra la versión del software junto con información detallada de los algoritmos de compresión soportados."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install zip -y",
+      "arch_linux": "sudo pacman -S zip",
+      "rhel_centos": "sudo dnf install zip -y"
+    }
+  },
+  "relaciones": [
+    {
+      "tema": "unzip",
+      "ruta": "commands/compression/unzip"
+    },
+    {
+      "tema": "tar",
+      "ruta": "commands/compression/tar"
+    }
+  ],
+  "ejemplos": [
+    {
+      "uso": "zip -r respaldo.zip /ruta/al/directorio",
+      "explicacion": "Crea un archivo llamado 'respaldo.zip' empaquetando y comprimiendo de forma recursiva todo el contenido de la carpeta indicada."
+    },
+    {
+      "uso": "zip -e -r confidencial.zip carpeta_privada",
+      "explicacion": "Comprime la carpeta especificada de forma recursiva protegiendo el archivo con una contraseña que el usuario deberá ingresar en la terminal."
+    }
+  ]
+}

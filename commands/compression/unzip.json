@@ -1,1 +1,89 @@
-{}
+{
+  "comando": "unzip",
+  "descripcion": "Listar, probar y extraer archivos comprimidos en formato ZIP.",
+  "categoria": ["commands", "compression"],
+  "estructura": "unzip [opciones] archivo.zip [archivos_a_extraer] [-x archivos_excluidos] [-d directorio_destino]",
+  "opciones": [
+    {
+      "parametro": ["-l", "--list"],
+      "descripcion": "Lista los archivos contenidos en el archivo ZIP en formato corto (nombre, tamaño, fecha y hora) sin extraer nada."
+    },
+    {
+      "parametro": ["-v", "--verbose"],
+      "descripcion": "Modo detallado; muestra información técnica de los archivos (razón de compresión, CRC-32, etc.) o funciona como diagnóstico."
+    },
+    {
+      "parametro": ["-t", "--test"],
+      "descripcion": "Verifica la integridad del archivo ZIP realizando una descompresión de prueba en memoria sin escribir en el disco."
+    },
+    {
+      "parametro": ["-d"],
+      "descripcion": "Especifica el directorio de destino donde se extraerán los archivos. Si no existe, se creará automáticamente."
+    },
+    {
+      "parametro": ["-x"],
+      "descripcion": "Excluye los archivos o patrones especificados de la operación de extracción o listado."
+    },
+    {
+      "parametro": ["-q", "--quiet"],
+      "descripcion": "Modo silencioso; suprime la mayoría de los mensajes informativos durante la extracción. Usar '-qq' para un silencio absoluto."
+    },
+    {
+      "parametro": ["-o", "--overwrite"],
+      "descripcion": "Fuerza la sobrescritura de los archivos existentes en el destino sin solicitar confirmación al usuario."
+    },
+    {
+      "parametro": ["-n", "--never-overwrite"],
+      "descripcion": "No sobrescribe los archivos existentes en el destino. Omite de forma silenciosa la extracción de dichos archivos."
+    },
+    {
+      "parametro": ["-j", "--junk-paths"],
+      "descripcion": "Ignora la estructura de directorios interna del archivo ZIP y extrae todos los archivos directamente en el directorio de destino."
+    },
+    {
+      "parametro": ["-P", "--password"],
+      "descripcion": "Especifica la contraseña directamente en la línea de comandos para descifrar archivos ZIP protegidos (no recomendado por motivos de seguridad)."
+    },
+    {
+      "parametro": ["-P", "--password"],
+      "descripcion": "Permite descifrar archivos comprimidos que están protegidos con contraseña."
+    },
+    {
+      "parametro": ["-h", "--help"],
+      "descripcion": "Muestra un mensaje de ayuda con las opciones disponibles y finaliza."
+    },
+    {
+      "parametro": ["--version"],
+      "descripcion": "Muestra la versión del software junto con la información del entorno de compilación."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install unzip -y",
+      "arch_linux": "sudo pacman -S unzip",
+      "rhel_centos": "sudo dnf install unzip -y"
+    }
+  },
+  "relaciones": [
+    {
+      "tema": "zip",
+      "ruta": "commands/compression/zip"
+    },
+    {
+      "tema": "tar",
+      "ruta": "commands/compression/tar"
+    }
+  ],
+  "ejemplos": [
+    {
+      "uso": "unzip archivo.zip -d /ruta/destino/",
+      "explicacion": "Extrae todo el contenido de 'archivo.zip' dentro de la carpeta especificada en la ruta de destino."
+    },
+    {
+      "uso": "unzip -l archivo.zip",
+      "explicacion": "Muestra la lista completa de archivos y carpetas empaquetados dentro del archivo ZIP sin llegar a descomprimirlos."
+    }
+  ]
+}

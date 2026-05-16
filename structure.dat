@@ -40,7 +40,6 @@ linuxcore/
 ├── translations/
 └── docs/
 
-
 core/
 ├── linux_philosophy/
 ├── posix/
@@ -56,7 +55,6 @@ core/
 ├── ipc/
 ├── users_and_groups/
 └── shell_environment/
-
 
 commands/
 ├── grep/
@@ -212,13 +210,13 @@ labs/
 Estructura json:
 ```
 {
-  "comando": "ufw",
+  "comando": ["ufw", "protocols"],
   "descripcion": "Uncomplicated Firewall, una interfaz simplificada para gestionar reglas de iptables.",
   "categoria": "security",
   "estructura": "ufw [opciones] comando",
   "opciones": [
     {
-      "parametro": "enable",
+      "parametro": ["enable", "-e"],
       "descripcion": "Activa el firewall y lo configura para que inicie con el sistema."
     },
     {

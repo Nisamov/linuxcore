@@ -1,1 +1,97 @@
-{}
+{
+  "comando": "tar",
+  "descripcion": "Almacena, extrae y manipula archivos de archivo (tarballs), permitiendo empaquetar múltiples archivos y directorios en uno solo, con o sin compresión.",
+  "categoria": ["commands", "compression"],
+  "estructura": "tar [opciones] [archivo_tar] [archivos_o_directorios]",
+  "opciones": [
+    {
+      "parametro": ["-c", "--create"],
+      "descripcion": "Crea un nuevo archivo de empaquetado (.tar)."
+    },
+    {
+      "parametro": ["-x", "--extract", "--get"],
+      "descripcion": "Extrae el contenido de un archivo empaquetado."
+    },
+    {
+      "parametro": ["-t", "--list"],
+      "descripcion": "Lista el contenido de un archivo empaquetado sin extraerlo."
+    },
+    {
+      "parametro": ["-f", "--file"],
+      "descripcion": "Especifica el nombre del archivo de archivo sobre el que se va a operar. Es obligatorio en casi todas las operaciones."
+    },
+    {
+      "parametro": ["-v", "--verbose"],
+      "descripcion": "Modo detallado; muestra de forma progresiva los archivos que están siendo procesados."
+    },
+    {
+      "parametro": ["-z", "--gzip", "--gunzip", "--ungzip"],
+      "descripcion": "Filtra el archivo a través del algoritmo gzip. Se usa para crear o extraer archivos '.tar.gz' o '.tgz'."
+    },
+    {
+      "parametro": ["-j", "--bzip2"],
+      "descripcion": "Filtra el archivo a través del algoritmo bzip2. Se usa para crear o extraer archivos '.tar.bz2' o '.tbz2'."
+    },
+    {
+      "parametro": ["-J", "--xz"],
+      "descripcion": "Filtra el archivo a través del algoritmo xz. Se usa para crear o extraer archivos '.tar.xz'."
+    },
+    {
+      "parametro": ["-v", "--verbose"],
+      "descripcion": "Modo detallado; muestra el progreso listando los archivos procesados en la terminal."
+    },
+    {
+      "parametro": ["-C", "--directory"],
+      "descripcion": "Cambia al directorio especificado antes de realizar la operación (ideal para extraer en una ruta específica)."
+    },
+    {
+      "parametro": ["--exclude"],
+      "descripcion": "Excluye archivos o directorios que coincidan con el patrón indicado durante el empaquetado."
+    },
+    {
+      "parametro": ["-r", "--append"],
+      "descripcion": "Añade archivos al final de un archivo empaquetado existente (no funciona si el archivo ya está comprimido)."
+    },
+    {
+      "parametro": ["-u", "--update"],
+      "descripcion": "Solo añade los archivos que sean más recientes que la copia que ya existe dentro del archivo empaquetado."
+    },
+    {
+      "parametro": ["-h", "--help"],
+      "descripcion": "Muestra un mensaje de ayuda con las opciones disponibles y finaliza."
+    },
+    {
+      "parametro": ["--version"],
+      "descripcion": "Muestra la versión del software junto con los términos y condiciones de la licencia."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install tar -y",
+      "arch_linux": "sudo pacman -S tar",
+      "rhel_centos": "sudo dnf install tar -y"
+    }
+  },
+  "relaciones": [
+    {
+      "tema": "gzip",
+      "ruta": "commands/compression/gzip"
+    },
+    {
+      "tema": "bzip2",
+      "ruta": "commands/compression/bzip2"
+    }
+  ],
+  "ejemplos": [
+    {
+      "uso": "tar -cvzf archivo.tar.gz /ruta/al/directorio",
+      "explicacion": "Crea un archivo comprimido con gzip (.tar.gz) a partir del contenido del directorio especificado, mostrando los archivos procesados."
+    },
+    {
+      "uso": "tar -xvzf archivo.tar.gz -C /ruta/destino",
+      "explicacion": "Extrae el contenido de un archivo comprimido (.tar.gz) dentro del directorio de destino indicado."
+    }
+  ]
+}
