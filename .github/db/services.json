@@ -1,8 +1,8 @@
 [
   {
-    "servicio": "mariadb",
+    "servicio": "apache2",
     "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start mariadb",
+    "comando_servicio": "systemctl start apache2",
     "categoria_db": "general",
     "configuraciones": [],
     "instalacion": {
@@ -12,81 +12,9 @@
     "ejemplos": []
   },
   {
-    "servicio": "postgresql",
+    "servicio": "nginx",
     "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start postgresql",
-    "categoria_db": "general",
-    "configuraciones": [],
-    "instalacion": {
-      "es_instalable": false,
-      "pasos": {}
-    },
-    "ejemplos": []
-  },
-  {
-    "servicio": "redis",
-    "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start redis",
-    "categoria_db": "general",
-    "configuraciones": [],
-    "instalacion": {
-      "es_instalable": false,
-      "pasos": {}
-    },
-    "ejemplos": []
-  },
-  {
-    "servicio": "chronyd",
-    "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start chronyd",
-    "categoria_db": "general",
-    "configuraciones": [],
-    "instalacion": {
-      "es_instalable": false,
-      "pasos": {}
-    },
-    "ejemplos": []
-  },
-  {
-    "servicio": "dhcpd",
-    "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start dhcpd",
-    "categoria_db": "general",
-    "configuraciones": [],
-    "instalacion": {
-      "es_instalable": false,
-      "pasos": {}
-    },
-    "ejemplos": []
-  },
-  {
-    "servicio": "named",
-    "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start named",
-    "categoria_db": "general",
-    "configuraciones": [],
-    "instalacion": {
-      "es_instalable": false,
-      "pasos": {}
-    },
-    "ejemplos": []
-  },
-  {
-    "servicio": "iptables",
-    "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start iptables",
-    "categoria_db": "general",
-    "configuraciones": [],
-    "instalacion": {
-      "es_instalable": false,
-      "pasos": {}
-    },
-    "ejemplos": []
-  },
-  {
-    "servicio": "sshd",
-    "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start sshd",
+    "comando_servicio": "systemctl start nginx",
     "categoria_db": "general",
     "configuraciones": [],
     "instalacion": {
@@ -137,6 +65,102 @@
     ]
   },
   {
+    "servicio": "sshd",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start sshd",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "iptables",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start iptables",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "mariadb",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start mariadb",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "postgresql",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start postgresql",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "redis",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start redis",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "dhcpd",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start dhcpd",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "chronyd",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start chronyd",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "named",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start named",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
     "servicio": "crond",
     "descripcion": "Sin descripción registrada.",
     "comando_servicio": "systemctl start crond",
@@ -152,30 +176,6 @@
     "servicio": "systemd-journald",
     "descripcion": "Sin descripción registrada.",
     "comando_servicio": "systemctl start systemd-journald",
-    "categoria_db": "general",
-    "configuraciones": [],
-    "instalacion": {
-      "es_instalable": false,
-      "pasos": {}
-    },
-    "ejemplos": []
-  },
-  {
-    "servicio": "apache2",
-    "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start apache2",
-    "categoria_db": "general",
-    "configuraciones": [],
-    "instalacion": {
-      "es_instalable": false,
-      "pasos": {}
-    },
-    "ejemplos": []
-  },
-  {
-    "servicio": "nginx",
-    "descripcion": "Sin descripción registrada.",
-    "comando_servicio": "systemctl start nginx",
     "categoria_db": "general",
     "configuraciones": [],
     "instalacion": {
