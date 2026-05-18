@@ -86,16 +86,6 @@
       "rhel_centos": "sudo dnf install gzip -y"
     }
   },
-  "relaciones": [
-    {
-      "tema": "",
-      "ruta": ""
-    },
-    {
-      "tema": "",
-      "ruta": ""
-    }
-  ],
   "ejemplos": [
     {
       "uso": "gzip archivo.txt",

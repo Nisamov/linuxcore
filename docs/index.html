@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinuxCore Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--sb-track, #11111b);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb, #313244);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--sb-thumb-hover, #45475a);
+        }
+        select option {
+            background-color: #1e1e2e !important;
+            color: #ffffff !important;
+        }
+        .theme-white select option, .theme-basic select option {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden transition-colors duration-200 antialiased font-sans text-lg text-gray-300 bg-[#1e1e2e]" id="theme-body">
+
+    <header class="px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-6 border-b border-[#313244] bg-[#11111b]" id="theme-header">
+        <div class="flex items-center space-x-4 w-full md:w-auto">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight text-white" id="theme-title">LinuxCore Hub</h1>
+                <p class="text-sm opacity-60" id="theme-subtitle">Conocimiento libre a tu alcance</p>
+                <p class="text-xs opacity-50 mt-0.5" id="theme-author">Proyecto de <a href="https://github.com/nisamov" target="_blank" class="underline hover:opacity-100 transition-opacity font-semibold">Nisamov</a></p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4 w-full md:w-auto justify-end">
+            <div class="relative">
+                <select id="source-format-filter" onchange="handleSourceFormatChange()" 
+                        class="rounded-xl px-4 py-2.5 text-sm font-mono outline-none border border-[#313244] bg-[#1e1e2e] text-white cursor-pointer appearance-none pr-10">
+                    <option value="commands.json">Base de Comandos</option>
+                    <option value="services.json">Servicios del Sistema</option>
+                    <option value="raw_markdown">Guías Estructuradas (.md)</option>
+                </select>
+                <i class="fa-solid fa-database absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs opacity-60" id="format-icon"></i>
+            </div>
+
+            <div class="relative w-full sm:w-80">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 opacity-50 text-sm" id="search-icon"></i>
+                <input type="text" id="search-input" oninput="filterData()" placeholder="Buscar elemento..." 
+                       class="w-full border rounded-xl pl-10 pr-4 py-2.5 text-sm outline-none border-[#313244] bg-[#1e1e2e] text-white focus:border-[#89b4fa]">
+            </div>
+
+            <div class="flex items-center space-x-2 border rounded-xl p-1.5 border-[#313244] bg-[#1e1e2e]" id="theme-switcher-box">
+                <label class="text-xs font-bold px-2 uppercase opacity-50 font-mono text-white flex items-center gap-1" id="theme-label">
+                    <i class="fa-solid fa-palette"></i> Estilo:
+                </label>
+                <select id="theme-switcher" onchange="applyTheme(this.value)" class="bg-transparent text-sm font-semibold outline-none cursor-pointer font-mono text-white">
+                    <option value="dark">Dark (Por defecto)</option>
+                    <option value="basic">Basic (Minimalista)</option>
+                    <option value="cyber">Cyberpunk</option>
+                    <option value="neodark">NeoDark</option>
+                    <option value="cyan">Cyan</option>
+                    <option value="white">White (Alto Contraste)</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        
+        <aside class="w-80 border-r flex flex-col bg-[#11111b] border-[#313244]" id="theme-sidebar">
+            <div class="p-4 border-b border-[#313244]" id="sidebar-filter-box">
+                <div class="relative">
+                    <select id="category-filter" onchange="filterData()" class="w-full text-sm rounded-xl p-3 outline-none border border-[#313244] bg-[#1e1e2e] text-white cursor-pointer font-mono appearance-none pr-10">
+                        <option value="all">Ver Todo el Sistema</option>
+                    </select>
+                    <i class="fa-solid fa-folder-tree absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-sm opacity-60"></i>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-3 space-y-3">
+                <div class="text-xs font-bold tracking-wider uppercase px-2 flex justify-between items-center text-gray-400" id="sidebar-title-box">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-list-ul"></i> Índice de Elementos</span>
+                    <span id="items-count" class="font-mono bg-[#313244] px-2 py-0.5 rounded text-xs text-white">0</span>
+                </div>
+                <ul class="space-y-1" id="data-list"></ul>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col overflow-hidden relative bg-[#1e1e2e]" id="theme-viewport">
+            
+            <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center space-y-3 z-50 transition-opacity duration-300 bg-inherit">
+                <div class="w-8 h-8 border-3 border-[#89b4fa] border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-xs font-mono uppercase tracking-widest opacity-60">Cargando Módulo Core...</p>
+            </div>
+
+            <div id="empty-state" class="flex-1 flex flex-col items-center justify-center p-12 hidden opacity-40">
+                <i class="fa-solid fa-terminal text-5xl mb-3"></i>
+                <p class="text-base font-mono text-center">Selecciona un elemento en el menú izquierdo para leer su manual.</p>
+            </div>
+
+            <div id="render-viewport" class="flex-1 overflow-y-auto p-8 md:p-12 space-y-8 hidden max-w-6xl w-full mx-auto"></div>
+        </main>
+    </div>
+
+    <script>
+        const THEMES = {
+            dark: {
+                body: "bg-[#1e1e2e] text-[#cdd6f4]", header: "bg-[#11111b] border-[#313244]", title: "text-white font-bold", subtitle: "text-sm text-gray-400 opacity-60", author: "text-xs text-gray-400 opacity-50",
+                search: "bg-[#1e1e2e] border-[#313244] text-white focus:border-[#89b4fa]", searchIcon: "text-white opacity-50",
+                sidebar: "bg-[#11111b] border-[#313244]", activeItem: "bg-[#313244] text-[#89b4fa] font-bold rounded-xl",
+                hoverItem: "hover:bg-[#181825]/60 text-[#a6adc8] hover:text-white rounded-xl", viewport: "bg-[#1e1e2e]",
+                card: "bg-[#11111b] border border-[#313244] rounded-xl shadow-md", codeBlock: "bg-[#11111b] text-[#a6e3a1] rounded-xl border border-[#313244]",
+                tableHeader: "bg-[#11111b] text-[#a6adc8] border-b border-[#313244] font-bold", tableRow: "border-b border-[#313244] hover:bg-[#313244]/20",
+                tag: "bg-[#313244] text-[#89b4fa] font-mono rounded-md", h2: "text-white",
+                sbTrack: "#11111b", sbThumb: "#313244", sbThumbHover: "#45475a"
+            },
+            basic: {
+                body: "bg-[#f8fafc] text-[#334155]", header: "bg-white border-[#e2e8f0]", title: "text-[#0f172a] font-semibold", subtitle: "text-sm text-[#64748b]", author: "text-xs text-[#94a3b8]",
+                search: "bg-[#f8fafc] border-[#cbd5e1] text-[#0f172a] focus:border-[#64748b]", searchIcon: "text-[#64748b]",
+                sidebar: "bg-white border-[#e2e8f0]", activeItem: "bg-[#f1f5f9] text-[#0f172a] font-bold rounded-xl border-l-4 border-[#64748b]",
+                hoverItem: "hover:bg-[#f8fafc] text-[#64748b] hover:text-[#0f172a] rounded-xl", viewport: "bg-[#f8fafc]",
+                card: "bg-white border border-[#e2e8f0] rounded-xl shadow-sm", codeBlock: "bg-[#1e293b] text-[#38bdf8] rounded-xl border border-[#334155]",
+                tableHeader: "bg-[#f8fafc] text-[#475569] border-b border-[#e2e8f0] font-bold", tableRow: "border-b border-[#f1f5f9] hover:bg-[#f8fafc]",
+                tag: "bg-[#e2e8f0] text-[#475569] font-mono rounded-md", h2: "text-[#0f172a]",
+                sbTrack: "#f1f5f9", sbThumb: "#cbd5e1", sbThumbHover: "#94a3b8"
+            },
+            cyber: {
+                body: "bg-[#0a0f1d] text-[#a2b5cd]", header: "bg-[#0e1726] border-[#1f2e4d]", title: "text-white font-mono tracking-wider", subtitle: "text-xs text-[#38bdf8] opacity-80", author: "text-xs text-[#00ffcc] opacity-60",
+                search: "bg-[#0a0f1d] border-[#1f2e4d] text-white focus:border-[#00ffcc]", searchIcon: "text-[#00ffcc] opacity-70",
+                sidebar: "bg-[#0e1726] border-[#1f2e4d]", activeItem: "bg-[#17253f] text-[#00ffcc] font-bold rounded-xl border border-[#00ffcc]/30",
+                hoverItem: "hover:bg-[#121f37] text-gray-400 hover:text-white rounded-xl", viewport: "bg-[#070b14]",
+                card: "bg-[#0e1726] border border-[#1f2e4d]", codeBlock: "bg-[#0a0f1d] text-[#00ffcc] border border-[#1f2e4d]",
+                tableHeader: "bg-[#0a0f1d] text-[#00ffcc] border-b border-[#1f2e4d]", tableRow: "border-b border-[#1f2e4d] hover:bg-[#17253f]/40",
+                tag: "bg-[#0a0f1d] border border-[#1f2e4d] text-[#38bdf8] rounded-md", h2: "text-white",
+                sbTrack: "#0e1726", sbThumb: "#1f2e4d", sbThumbHover: "#00ffcc"
+            },
+            neodark: {
+                body: "bg-[#050505] text-[#999]", header: "bg-[#000] border-[#151515]", title: "text-white font-mono", subtitle: "text-xs text-gray-500", author: "text-xs text-gray-600",
+                search: "bg-[#050505] border-[#202020] text-white focus:border-[#444]", searchIcon: "text-white opacity-40",
+                sidebar: "bg-[#000] border-[#151515]", activeItem: "bg-[#101010] text-white font-bold rounded-none border-b border-white w-full text-left px-4 py-3 text-sm font-mono block",
+                hoverItem: "hover:bg-[#0a0a0a] text-[#777] hover:text-white", viewport: "bg-[#050505]",
+                card: "bg-[#000] border border-[#151515] rounded-none", codeBlock: "bg-[#090909] text-[#eee] border border-[#151515]",
+                tableHeader: "bg-[#080808] text-[#666] border-b border-[#151515]", tableRow: "border-b border-[#111] hover:bg-[#0a0a0a]",
+                tag: "bg-[#101010] text-[#aaa] border border-[#202020] rounded-none", h2: "text-white",
+                sbTrack: "#000000", sbThumb: "#222222", sbThumbHover: "#444444"
+            },
+            cyan: {
+                body: "bg-[#081217] text-[#b0cddb]", header: "bg-[#0c1a24] border-[#183446]", title: "text-white font-bold", subtitle: "text-xs text-[#00e1ff] opacity-70", author: "text-xs text-[#b0cddb] opacity-50",
+                search: "bg-[#081217] border-[#183446] text-white focus:border-[#00e1ff]", searchIcon: "text-[#00e1ff] opacity-60",
+                sidebar: "bg-[#0c1a24] border-[#183446]", activeItem: "bg-[#132837] text-[#00e1ff] rounded-xl shadow-lg shadow-[#00e1ff]/5",
+                hoverItem: "hover:bg-[#0f212e] text-[#b0cddb] hover:text-white rounded-xl", viewport: "bg-[#050d12]",
+                card: "bg-[#0c1a24] border border-[#183446] rounded-xl", codeBlock: "bg-[#081217] text-[#00e1ff] border border-[#183446] rounded-xl",
+                tableHeader: "bg-[#081217] text-[#7eb2cf] border-b border-[#183446]", tableRow: "border-b border-[#183446] hover:bg-[#132837]/30",
+                tag: "bg-[#132837] text-[#00e1ff] rounded-md", h2: "text-white",
+                sbTrack: "#0c1a24", sbThumb: "#183446", sbThumbHover: "#00e1ff"
+            },
+            white: {
+                body: "bg-[#ffffff] text-[#000000]", header: "bg-[#ffffff] border-[#000000] border-b-2", title: "text-[#000000] font-black uppercase tracking-tight", subtitle: "text-xs text-[#1e293b] font-bold", author: "text-xs text-[#334155]",
+                search: "bg-[#f1f5f9] border-2 border-[#000000] text-[#000000] focus:bg-[#ffffff] rounded-none", searchIcon: "text-[#000000]",
+                sidebar: "bg-[#ffffff] border-r-2 border-[#000000]", activeItem: "bg-[#000000] text-[#ffffff] font-bold rounded-none w-full",
+                hoverItem: "hover:bg-[#f1f5f9] text-[#1e293b] hover:text-[#000000] rounded-none border border-transparent hover:border-[#000000]", viewport: "bg-[#f8fafc]",
+                card: "bg-[#ffffff] border-2 border-[#000000] rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]", codeBlock: "bg-[#000000] text-[#ffffff] rounded-none p-4 font-mono",
+                tableHeader: "bg-[#f1f5f9] text-[#000000] border-b-2 border-[#000000] font-black uppercase text-xs", tableRow: "border-b border-[#e2e8f0] hover:bg-[#f1f5f9]",
+                tag: "bg-[#000000] text-[#ffffff] font-mono rounded-none text-xs px-2 py-0.5", h2: "text-[#000000] font-bold",
+                sbTrack: "#ffffff", sbThumb: "#000000", sbThumbHover: "#334155"
+            }
+        };
+
+        let currentTheme = 'dark';
+        let rawDataset = [];
+        let activeFormat = 'commands.json'; 
+        let currentActiveId = null;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            applyTheme('dark'); 
+            loadSourceData(activeFormat);
+        });
+
+        function applyTheme(themeName) {
+            currentTheme = themeName;
+            const theme = THEMES[themeName];
+            
+            const root = document.documentElement;
+            root.style.setProperty('--sb-track', theme.sbTrack);
+            root.style.setProperty('--sb-thumb', theme.sbThumb);
+            root.style.setProperty('--sb-thumb-hover', theme.sbThumbHover);
+
+            const bodyEl = document.getElementById('theme-body');
+            bodyEl.className = `${theme.body} h-screen flex flex-col overflow-hidden transition-colors duration-200 antialiased text-lg`;
+            
+            if(themeName === 'white') {
+                bodyEl.classList.add('theme-white');
+                bodyEl.classList.remove('theme-basic');
+            } else if(themeName === 'basic') {
+                bodyEl.classList.add('theme-basic');
+                bodyEl.classList.remove('theme-white');
+            } else {
+                bodyEl.classList.remove('theme-white', 'theme-basic');
+            }
+            
+            document.getElementById('theme-header').className = `${theme.header} px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-6 border-b`;
+            document.getElementById('theme-title').className = `${theme.title} text-2xl tracking-tight`;
+            document.getElementById('theme-subtitle').className = `${theme.subtitle}`;
+            document.getElementById('theme-author').className = `${theme.author} mt-0.5`;
+            document.getElementById('theme-sidebar').className = `${theme.sidebar} w-80 border-r flex flex-col`;
+            document.getElementById('theme-viewport').className = `${theme.viewport} flex-1 flex flex-col overflow-hidden relative`;
+            
+            document.getElementById('search-input').className = `${theme.search} w-full border rounded-xl pl-10 pr-4 py-2.5 text-sm outline-none transition-all`;
+            document.getElementById('search-icon').className = `fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-sm ${theme.searchIcon}`;
+            document.getElementById('source-format-filter').className = `${theme.search} rounded-xl px-4 py-2.5 text-sm font-mono outline-none border transition-all cursor-pointer appearance-none pr-10`;
+            document.getElementById('category-filter').className = `${theme.search} w-full text-sm rounded-xl p-3 outline-none border cursor-pointer font-mono appearance-none pr-10`;
+            document.getElementById('theme-switcher-box').className = `flex items-center space-x-2 border rounded-xl p-1.5 ${theme.search}`;
+            
+            const labelEl = document.getElementById('theme-label');
+            const switcherEl = document.getElementById('theme-switcher');
+            
+            if (themeName === 'white') {
+                labelEl.className = "text-xs font-bold px-2 uppercase font-mono text-black flex items-center gap-1";
+                switcherEl.className = "bg-transparent text-sm font-bold outline-none cursor-pointer font-mono text-black";
+                document.getElementById('items-count').className = "font-mono bg-black px-2 py-0.5 text-xs text-white";
+                document.getElementById('sidebar-title-box').className = "text-xs font-bold tracking-wider uppercase px-2 flex justify-between items-center text-black";
+            } else if (themeName === 'basic') {
+                labelEl.className = "text-xs font-bold px-2 uppercase font-mono text-gray-700 flex items-center gap-1";
+                switcherEl.className = "bg-transparent text-sm font-semibold outline-none cursor-pointer font-mono text-gray-700";
+                document.getElementById('items-count').className = "font-mono bg-gray-200 px-2 py-0.5 rounded text-xs text-gray-700";
+                document.getElementById('sidebar-title-box').className = "text-xs font-bold tracking-wider uppercase px-2 flex justify-between items-center text-gray-500";
+            } else {
+                labelEl.className = "text-xs font-bold px-2 uppercase opacity-50 font-mono text-white flex items-center gap-1";
+                switcherEl.className = "bg-transparent text-sm font-semibold outline-none cursor-pointer font-mono text-white";
+                document.getElementById('items-count').className = "font-mono bg-[#313244] px-2 py-0.5 rounded text-xs text-white";
+                document.getElementById('sidebar-title-box').className = "text-xs font-bold tracking-wider uppercase px-2 flex justify-between items-center text-gray-400";
+            }
+
+            filterData();
+            if (currentActiveId) {
+                renderTargetDetails(currentActiveId);
+            }
+        }
+
+        async function loadSourceData(fileName) {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'flex';
+            loader.style.opacity = '1';
+
+            // Algoritmo de resolución multi-ruta secuencial (Evita fallos por rutas de despliegue)
+            let routesToTry = [
+                `../.github/db/${fileName}`,
+                `/.github/db/${fileName}`,
+                `./.github/db/${fileName}`
+            ];
+            
+            let response = null;
+            let incomingData = null;
+
+            for (let route of routesToTry) {
+                try {
+                    response = await fetch(route);
+                    if (response.ok) {
+                        incomingData = await response.json();
+                        break; 
+                    }
+                } catch (e) {}
+            }
+            
+            try {
+                if (!response || !response.ok || !incomingData) throw new Error();
+                
+                let normalized = [];
+                if (incomingData && !Array.isArray(incomingData)) {
+                    normalized = Object.keys(incomingData).map(key => {
+                        const item = incomingData[key];
+                        return {
+                            comando: item.comando || item.servicio || key,
+                            descripcion: item.descripcion || '',
+                            estructura: item.estructura || item.comando_servicio || '',
+                            categoria_db: item.categoria_db || 'general',
+                            opciones: item.opciones || item.configuraciones || [],
+                            instalacion: item.instalacion || {},
+                            ejemplos: item.ejemplos || []
+                        };
+                    });
+                } else if (Array.isArray(incomingData)) {
+                    normalized = incomingData.map(item => ({
+                        comando: item.comando || item.servicio || 'unknown',
+                        descripcion: item.descripcion || '',
+                        estructura: item.estructura || item.comando_servicio || '',
+                        categoria_db: item.categoria_db || 'general',
+                        opciones: item.opciones || item.configuraciones || [],
+                        instalacion: item.instalacion || {},
+                        ejemplos: item.ejemplos || []
+                    }));
+                }
+
+                rawDataset = normalized;
+                rebuildCategoryFilter();
+                filterData();
+
+                if (rawDataset.length > 0) {
+                    renderTargetDetails(rawDataset[0].comando);
+                } else {
+                    showEmptyState();
+                }
+            } catch (err) {
+                console.error("Fallo crítico al leer JSON: ", err);
+                document.getElementById('data-list').innerHTML = `
+                    <div class="p-4 text-xs text-red-500 font-mono space-y-2">
+                        <p class="font-bold"><i class="fa-solid fa-triangle-exclamation"></i> Error leyendo origen.</p>
+                        <p class="opacity-70">Asegúrate de que el archivo "${fileName}" exista dentro de la carpeta ".github/db/" y que su formato JSON sea válido.</p>
+                        <p class="text-[10px] opacity-50">Tip: Si estás abriendo el HTML localmente sin un servidor web (Live Server, Nginx, etc.), las políticas CORS del navegador bloquearán los archivos JSON.</p>
+                    </div>`;
+            } finally {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 200);
+            }
+        }
+
+        function handleSourceFormatChange() {
+            activeFormat = document.getElementById('source-format-filter').value;
+            document.getElementById('search-input').value = '';
+            
+            const formatIcon = document.getElementById('format-icon');
+            
+            if(activeFormat === 'raw_markdown') {
+                formatIcon.className = "fa-solid fa-file-lines absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs opacity-60";
+                rawDataset = [
+                    { id: "docker-info", titulo: "Docker - Instalación", descripcion: "Guía de despliegue de contenedores en sistemas Core.", categoria_db: "container", tipo: "markdown" },
+                    { id: "mysql-backups", titulo: "MySQL - Backups", descripcion: "Estrategias de respaldo y restauración lógica.", categoria_db: "databases", tipo: "markdown" }
+                ];
+                rebuildCategoryFilter();
+                filterData();
+                if (rawDataset.length > 0) {
+                    renderTargetDetails(rawDataset[0].id);
+                }
+            } else {
+                formatIcon.className = "fa-solid fa-database absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-xs opacity-60";
+                loadSourceData(activeFormat);
+            }
+        }
+
+        function rebuildCategoryFilter() {
+            const select = document.getElementById('category-filter');
+            select.innerHTML = '<option value="all">Ver Todo el Sistema</option>';
+            
+            const categories = [...new Set(rawDataset.map(item => item.categoria_db))].filter(Boolean);
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = `${cat.toUpperCase().replace('_', ' ')}`;
+                select.appendChild(option);
+            });
+        }
+
+        function filterData() {
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const categoryValue = document.getElementById('category-filter').value;
+
+            const filtered = rawDataset.filter(item => {
+                const term = (activeFormat === 'raw_markdown') ? (item.titulo || '') : (item.comando || '');
+                const desc = item.descripcion || '';
+                
+                const matchesSearch = term.toLowerCase().includes(searchValue) || desc.toLowerCase().includes(searchValue);
+                const matchesCategory = (categoryValue === 'all') || (item.categoria_db === categoryValue);
+                
+                return matchesSearch && matchesCategory;
+            });
+
+            renderLeftMenu(filtered);
+        }
+
+        function renderLeftMenu(items) {
+            const listContainer = document.getElementById('data-list');
+            document.getElementById('items-count').textContent = items.length;
+            listContainer.innerHTML = '';
+
+            if (items.length === 0) {
+                listContainer.innerHTML = `<li class="text-sm p-4 text-center italic opacity-40">Sin coincidencias</li>`;
+                return;
+            }
+
+            const theme = THEMES[currentTheme];
+
+            items.forEach(item => {
+                const id = (activeFormat === 'raw_markdown') ? item.id : item.comando;
+                const prefix = (activeFormat === 'services.json') ? '⚙ ' : (activeFormat === 'raw_markdown' ? '' : '$ ');
+                const displayName = (activeFormat === 'raw_markdown') ? item.titulo : `${prefix}${item.comando}`;
+                
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <button onclick="renderTargetDetails('${id}')" id="node-btn-${id}" 
+                            class="w-full text-left px-4 py-3 text-sm font-mono transition-all flex items-center justify-between ${theme.hoverItem}">
+                        <span class="font-semibold truncate pr-2">${displayName}</span>
+                        <span class="text-[10px] px-1.5 py-0.5 shrink-0 ${theme.tag}">${item.categoria_db || ''}</span>
+                    </button>
+                `;
+                listContainer.appendChild(li);
+            });
+            refreshActiveElementUI();
+        }
+
+        function renderTargetDetails(id) {
+            currentActiveId = id;
+            const target = rawDataset.find(item => ((activeFormat === 'raw_markdown') ? item.id : item.comando) === id);
+            
+            if (!target) return;
+            refreshActiveElementUI();
+
+            document.getElementById('empty-state').className = 'hidden';
+            const viewport = document.getElementById('render-viewport');
+            viewport.className = 'flex-1 overflow-y-auto p-8 md:p-12 space-y-8 max-w-6xl w-full mx-auto block';
+            viewport.innerHTML = ''; 
+
+            const theme = THEMES[currentTheme];
+
+            if (activeFormat !== 'raw_markdown') {
+                const isService = (activeFormat === 'services.json');
+                const titleLabel = isService ? "Registro de Servicio" : "Registro Core";
+                const syntaxLabel = isService ? "Línea de Inicialización / Demonio" : "Sintaxis Operativa";
+                const tableCol1 = isService ? "Directiva / Parámetro" : "Flag";
+                const tableCol2 = isService ? "Impacto en el Entorno" : "Descripción de Ejecución";
+                const tableTitle = isService ? "Módulos y Configuración Interna" : "Flags y Parámetros";
+
+                viewport.innerHTML = `
+                    <div class="p-8 ${theme.card}">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono px-3 py-1 uppercase ${theme.tag}">${target.categoria_db || 'System'}</span>
+                            <span class="text-xs font-mono text-current opacity-60"><i class="fa-solid fa-circle-check"></i> ${titleLabel}</span>
+                        </div>
+                        <h2 class="text-4xl font-black tracking-tight mb-4 ${theme.h2}">${target.comando}</h2>
+                        <p class="text-base leading-relaxed text-current">${target.descripcion}</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="text-xs font-bold uppercase tracking-wider font-mono text-current opacity-60">${syntaxLabel}</div>
+                        <div class="p-5 flex justify-between items-center ${theme.codeBlock}">
+                            <code id="raw-syntax" class="font-bold text-base select-all">${isService ? '' : '$ '}${target.estructura || target.comando}</code>
+                            <button onclick="copyRawText('raw-syntax', this)" class="text-lg p-2 opacity-60 hover:opacity-100"><i class="fa-regular fa-copy"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="text-xs font-bold uppercase tracking-wider font-mono text-current opacity-60">${tableTitle}</div>
+                        <div class="overflow-hidden ${theme.card}">
+                            <table class="w-full text-left text-sm border-collapse">
+                                <thead>
+                                    <tr class="${theme.tableHeader} text-xs uppercase tracking-wider">
+                                        <th class="p-4 w-1/4">${tableCol1}</th>
+                                        <th class="p-4 w-3/4">${tableCol2}</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-500/10 font-mono text-sm text-current">
+                                    ${renderCommandFlags(target.opciones, theme)}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <div class="text-xs font-bold uppercase tracking-wider font-mono text-current opacity-60">Gestión y Ciclo de Vida</div>
+                            <div class="p-4 space-y-3 ${theme.card}">${renderInstallationBlock(target.instalacion, theme)}</div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="text-xs font-bold uppercase tracking-wider font-mono text-current opacity-60">Casos de Uso Prácticos</div>
+                            <div class="space-y-3">${renderExamplesBlock(target.ejemplos, theme)}</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                viewport.innerHTML = `
+                    <div class="p-8 ${theme.card}">
+                        <span class="text-xs font-mono px-3 py-1 uppercase ${theme.tag}">${target.categoria_db}</span>
+                        <h2 class="text-3xl font-bold mt-4 mb-2 ${theme.h2}">${target.titulo}</h2>
+                        <hr class="border-gray-500/20 my-4">
+                        <div class="space-y-4 text-base text-current">
+                            <p>${target.descripcion}</p>
+                            <div class="p-4 ${theme.codeBlock} font-mono text-sm">
+                                # Contenido mapeado desde la raíz del repositorio de Nisamov<br>
+                                $ cat /workspaces/repo/${target.categoria_db}/${target.id.split('-')[0]}.md
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function renderCommandFlags(opciones, theme) {
+            if (!opciones || opciones.length === 0) return `<tr><td colspan="2" class="p-4 italic opacity-50 text-center text-xs">Este módulo no requiere o no declara parámetros variables.</td></tr>`;
+            return opciones.map(opt => {
+                const paramValue = opt.parametro || opt.directiva || 'Config';
+                const flags = Array.isArray(paramValue) ? paramValue : [paramValue];
+                const badgeHtml = flags.map(f => `<span class="px-2 py-1 font-bold ${theme.tag} text-xs">${f}</span>`).join(' ');
+                const descValue = opt.descripcion || opt.efecto || 'Sin descripción detallada.';
+                
+                return `
+                    <tr class="${theme.tableRow}">
+                        <td class="p-4 flex flex-wrap gap-2">${badgeHtml}</td>
+                        <td class="p-4 text-sm leading-relaxed">${descValue}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function renderInstallationBlock(instalacion, theme) {
+            if (!instalacion || !instalacion.es_instalable) return `<p class="italic opacity-50 text-center py-6 text-sm font-mono">Componente nativo del sistema base.</p>`;
+            const pasos = instalacion.pasos || {};
+            return Object.keys(pasos).map((distro, i) => `
+                <div class="p-3 bg-black/5 rounded-xl border border-gray-500/10 flex items-center justify-between gap-3 font-mono text-xs mb-2">
+                    <div class="truncate">
+                        <span class="text-[10px] font-bold opacity-60 block uppercase tracking-wider">${distro.replace('_', ' ')}</span>
+                        <code id="inst-${i}" class="font-semibold text-current select-all text-sm">${pasos[distro]}</code>
+                    </div>
+                    <button onclick="copyRawText('inst-${i}', this)" class="p-2 opacity-60 hover:opacity-100"><i class="fa-regular fa-copy"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function renderExamplesBlock(ejemplos, theme) {
+            if (!ejemplos || ejemplos.length === 0) return `<p class="italic opacity-50 text-center py-6 text-sm font-mono">Sin muestras prácticas registradas en este bloque.</p>`;
+            return ejemplos.map((ex, i) => {
+                const commandValue = ex.uso || ex.comando_ejemplo || '#';
+                return `
+                    <div class="p-4 ${theme.card} space-y-2">
+                        <div class="p-3 flex justify-between items-center ${theme.codeBlock} text-sm">
+                            <code id="ex-${i}" class="font-bold select-all">${commandValue}</code>
+                            <button onclick="copyRawText('ex-${i}', this)" class="p-1.5 opacity-60 hover:opacity-100"><i class="fa-regular fa-copy"></i></button>
+                        </div>
+                        <p class="text-xs leading-relaxed px-1 font-sans text-current opacity-80">${ex.explicacion}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function refreshActiveElementUI() {
+            if (!currentActiveId) return;
+            const theme = THEMES[currentTheme];
+            
+            document.querySelectorAll('#data-list button').forEach(btn => {
+                btn.className = `w-full text-left px-4 py-3 text-sm font-mono transition-all flex items-center justify-between ${theme.hoverItem}`;
+            });
+
+            const targetBtn = document.getElementById(`node-btn-${currentActiveId}`);
+            if (targetBtn) {
+                targetBtn.className = `w-full text-left px-4 py-3 text-sm font-mono transition-all flex items-center justify-between ${theme.activeItem}`;
+            }
+        }
+
+        function showEmptyState() {
+            document.getElementById('empty-state').classList.remove('hidden');
+            document.getElementById('render-viewport').classList.add('hidden');
+        }
+
+        function copyRawText(elementId, button) {
+            const raw = document.getElementById(elementId).textContent;
+            const clean = raw.startsWith('$ ') ? raw.substring(2) : raw;
+            navigator.clipboard.writeText(clean).then(() => {
+                const icon = button.querySelector('i');
+                icon.className = "fa-solid fa-check text-green-500";
+                setTimeout(() => icon.className = "fa-regular fa-copy", 1200);
+            });
+        }
+    </script>
+</body>
+</html>

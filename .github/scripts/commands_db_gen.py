@@ -2,31 +2,89 @@ import json
 import os
 
 def build_commands_db():
-    commands_path = 'commands'
-    db_output_dir = '.github/db'
-    db_output_file = os.path.join(db_output_dir, 'commands.json')
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     
+    commands_path = os.path.abspath(os.path.join(script_dir, '../../commands'))
+    db_output_dir = os.path.abspath(os.path.join(script_dir, '../db'))
+    db_output_file = os.path.join(db_output_dir, 'commands.json')
     mega_db = []
+    
+    def get_empty_command_structure(command_name, category_name, source_file):
+        return {
+            "comando": command_name,
+            "descripcion": "Sin descripción registrada.",
+            "estructura": command_name,
+            "categoria_db": category_name,
+            "archivo_fuente": source_file,
+            "opciones": [],
+            "instalacion": {
+                "es_instalable": False,
+                "pasos": {}
+            },
+            "ejemplos": []
+        }
 
+    print(f"--> Buscando comandos en: {commands_path}")
+    if not os.path.exists(commands_path):
+        print(f"[ERROR] La carpeta '{commands_path}' no existe. Revisa la ubicación desde donde ejecutas el script.")
+        return
     if not os.path.exists(db_output_dir):
         os.makedirs(db_output_dir)
-
+        
+    total_archivos = 0
     for root, dirs, files in os.walk(commands_path):
-        for file in files:
-            if file.endswith('.json'):
-                full_path = os.path.join(root, file)
-                try:
-                    with open(full_path, 'r', encoding='utf-8') as f:
+        json_files = [f for f in files if f.endswith('.json')]
+        if not json_files:
+            continue
+        categoria = os.path.basename(root)
+        print(f"Procesando categoría [{categoria}] - Encontrados {len(json_files)} archivos")
+
+        for file in json_files:
+            full_path = os.path.join(root, file)
+            command_name_fallback = os.path.splitext(file)[0]
+            
+            try:
+                if os.path.getsize(full_path) == 0:
+                    print(f"   [AVISO] {file} está vacío. Aplicando estructura por defecto.")
+                    empty_data = get_empty_command_structure(command_name_fallback, categoria, file)
+                    mega_db.append(empty_data)
+                    total_archivos += 1
+                    continue
+
+                with open(full_path, 'r', encoding='utf-8') as f:
+                    try:
                         data = json.load(f)
-                        data['categoria_db'] = os.path.basename(root)
-                        mega_db.append(data)
-                except Exception as e:
-                    print(f"Error procesando {full_path}: {e}")
+                        
+                        if isinstance(data, dict):
+                            if "comando" not in data or not data["comando"]:
+                                data["comando"] = command_name_fallback
+                            data['categoria_db'] = categoria
+                            data['archivo_fuente'] = file
+                            mega_db.append(data)
+                        elif isinstance(data, list):
+                            for item in data:
+                                if isinstance(item, dict):
+                                    if "comando" not in item or not item["comando"]:
+                                        item["comando"] = command_name_fallback
+                                    item['categoria_db'] = categoria
+                                    item['archivo_fuente'] = file
+                            mega_db.extend(data)
+                            
+                        total_archivos += 1
+                        
+                    except json.JSONDecodeError as je:
+                        print(f"   [JSON CORRUPTO] Error de sintaxis en {file}. Aplicando estructura limpia.")
+                        empty_data = get_empty_command_structure(command_name_fallback, categoria, file)
+                        mega_db.append(empty_data)
+                        total_archivos += 1
+                        
+            except Exception as e:
+                print(f"   [ERROR CRÍTICO] No se pudo acceder a {file}: {e}")
 
     with open(db_output_file, 'w', encoding='utf-8') as f:
         json.dump(mega_db, f, indent=2, ensure_ascii=False)
-    
-    print(f"Base de datos generada con {len(mega_db)} comandos en {db_output_file}")
+    print(f"\n[ÉXITO] Base de datos generada en: {db_output_file}")
+    print(f" Total de comandos indexados: {total_archivos}")
 
 if __name__ == "__main__":
     build_commands_db()

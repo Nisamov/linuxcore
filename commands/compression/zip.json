@@ -70,16 +70,6 @@
       "rhel_centos": "sudo dnf install zip -y"
     }
   },
-  "relaciones": [
-    {
-      "tema": "unzip",
-      "ruta": "commands/compression/unzip"
-    },
-    {
-      "tema": "tar",
-      "ruta": "commands/compression/tar"
-    }
-  ],
   "ejemplos": [
     {
       "uso": "zip -r respaldo.zip /ruta/al/directorio",

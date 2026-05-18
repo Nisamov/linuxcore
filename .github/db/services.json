@@ -1,0 +1,187 @@
+[
+  {
+    "servicio": "mariadb",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start mariadb",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "postgresql",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start postgresql",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "redis",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start redis",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "chronyd",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start chronyd",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "dhcpd",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start dhcpd",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "named",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start named",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "iptables",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start iptables",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "sshd",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start sshd",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "ufw",
+    "descripcion": "Uncomplicated Firewall. Interfaz de gestión de filtrado de paquetes para netfilter/iptables diseñada para ser intuitiva y fácil de configurar en entornos LinuxCore.",
+    "comando_servicio": "systemctl enable --now ufw",
+    "categoria_db": "security",
+    "configuraciones": [
+      {
+        "directiva": "DEFAULT_INPUT_POLICY=\"DROP\"",
+        "efecto": "Establece la política por defecto para el tráfico entrante. Bloquea de forma estricta cualquier conexión que no esté explícitamente autorizada."
+      },
+      {
+        "directiva": "DEFAULT_OUTPUT_POLICY=\"ACCEPT\"",
+        "efecto": "Permite que el servidor realice cualquier tipo de conexión saliente hacia redes externas de forma nativa."
+      },
+      {
+        "directiva": "IPV6=yes",
+        "efecto": "Habilita el soporte para que las reglas de firewall se apliquen de igual forma a las pilas de red IPv6."
+      }
+    ],
+    "instalacion": {
+      "es_instalable": true,
+      "pasos": {
+        "ubuntu_debian": "sudo apt update && sudo apt install ufw -y",
+        "centos_rhel": "sudo dnf install epel-release -y && sudo dnf install ufw -y"
+      }
+    },
+    "ejemplos": [
+      {
+        "comando_ejemplo": "ufw status numbered",
+        "explicacion": "Muestra el estado actual del firewall junto con un índice numérico por regla, ideal para eliminarlas de forma precisa."
+      },
+      {
+        "comando_ejemplo": "ufw allow 22/tcp",
+        "explicacion": "Abre el puerto 22 bajo el protocolo TCP para garantizar que los accesos remotos por SSH no queden bloqueados."
+      },
+      {
+        "comando_ejemplo": "ufw reject from 192.168.1.50",
+        "explicacion": "Deniega el tráfico proveniente de una dirección IP específica de la red local, notificando activamente al emisor el rechazo."
+      }
+    ]
+  },
+  {
+    "servicio": "crond",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start crond",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "systemd-journald",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start systemd-journald",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "apache2",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start apache2",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  },
+  {
+    "servicio": "nginx",
+    "descripcion": "Sin descripción registrada.",
+    "comando_servicio": "systemctl start nginx",
+    "categoria_db": "general",
+    "configuraciones": [],
+    "instalacion": {
+      "es_instalable": false,
+      "pasos": {}
+    },
+    "ejemplos": []
+  }
+]

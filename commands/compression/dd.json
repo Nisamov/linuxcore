@@ -62,16 +62,6 @@
       "rhel_centos": "sudo dnf install coreutils"
     }
   },
-  "relaciones": [
-    {
-      "tema": "cp",
-      "ruta": "commands/utilities/cp"
-    },
-    {
-      "tema": "pv",
-      "ruta": "commands/miscellaneous/pv"
-    }
-  ],
   "ejemplos": [
     {
       "uso": "dd if=origen.iso of=/dev/sdX bs=4M status=progress",

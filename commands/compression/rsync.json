@@ -94,16 +94,6 @@
       "rhel_centos": "sudo dnf install rsync -y"
     }
   },
-  "relaciones": [
-    {
-      "tema": "cp",
-      "ruta": "commands/files/cp"
-    },
-    {
-      "tema": "scp",
-      "ruta": "commands/network/scp"
-    }
-  ],
   "ejemplos": [
     {
       "uso": "rsync -avz --progress /origen/ /destino/",

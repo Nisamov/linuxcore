@@ -26,20 +26,7 @@
       "rhel_centos": "sudo dnf install gzip less"
     }
   },
-  "relaciones": [
-    {
-      "tema": "less",
-      "ruta": "commands/files/less"
-    },
-    {
-      "tema": "gzip",
-      "ruta": "commands/compression/gzip"
-    },
-    {
-      "tema": "zgrep",
-      "ruta": "commands/files/zgrep"
-    }
-  ],
+
   "ejemplos": [
     {
       "uso": "zless /var/log/syslog.1.gz",

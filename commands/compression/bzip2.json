@@ -70,16 +70,6 @@
       "rhel_centos": "sudo dnf install bzip2 -y"
     }
   },
-  "relaciones": [
-    {
-      "tema": "",
-      "ruta": ""
-    },
-    {
-      "tema": "",
-      "ruta": ""
-    }
-  ],
   "ejemplos": [
     {
       "uso": "bzip2 -k archivo.txt",

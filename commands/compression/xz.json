@@ -70,20 +70,6 @@
       "rhel_centos": "sudo dnf install xz -y"
     }
   },
-  "relaciones": [
-    {
-      "tema": "gzip",
-      "ruta": "commands/compression/gzip"
-    },
-    {
-      "tema": "bzip2",
-      "ruta": "commands/compression/bzip2"
-    },
-    {
-      "tema": "tar",
-      "ruta": "commands/compression/tar"
-    }
-  ],
   "ejemplos": [
     {
       "uso": "xz -k archivo.tar",

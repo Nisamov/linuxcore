@@ -1,9 +1,10 @@
-name: Generación base de datos de comandos 
+name: Generación bases de datos
 
 on:
   push:
     paths:
       - 'commands/**'
+      - 'services/**'
   workflow_dispatch:
 
 jobs:
@@ -16,16 +17,19 @@ jobs:
       - name: Checkout repositorio
         uses: actions/checkout@v4
 
-      - name: Conigurar python
-        uses: actions/setup-python@v4
+      - name: Configurar python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
-      - name: Ejecución de generador
+      - name: Base de datos de comandos
         run: python .github/scripts/commands_db_gen.py
+
+      - name: Base de datos de servicios
+        run: python .github/scripts/services_db_gen.py
 
       - name: Commit y publicar
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "docs: actualización base datos de comandos"
-          file_pattern: '.github/db/commands.json'
+          commit_message: "docs: actualización automática de bases de datos"
+          file_pattern: '.github/db/*.json'

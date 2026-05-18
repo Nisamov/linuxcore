@@ -66,16 +66,6 @@
       "rhel_centos": "sudo dnf install unzip -y"
     }
   },
-  "relaciones": [
-    {
-      "tema": "zip",
-      "ruta": "commands/compression/zip"
-    },
-    {
-      "tema": "tar",
-      "ruta": "commands/compression/tar"
-    }
-  ],
   "ejemplos": [
     {
       "uso": "unzip archivo.zip -d /ruta/destino/",

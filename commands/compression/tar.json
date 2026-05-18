@@ -74,16 +74,6 @@
       "rhel_centos": "sudo dnf install tar -y"
     }
   },
-  "relaciones": [
-    {
-      "tema": "gzip",
-      "ruta": "commands/compression/gzip"
-    },
-    {
-      "tema": "bzip2",
-      "ruta": "commands/compression/bzip2"
-    }
-  ],
   "ejemplos": [
     {
       "uso": "tar -cvzf archivo.tar.gz /ruta/al/directorio",
