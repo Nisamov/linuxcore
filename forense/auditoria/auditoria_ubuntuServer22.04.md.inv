@@ -1,0 +1,188 @@
+<div align="center">
+    <h1>Auditoría Preventiva</h1>
+</div>
+<p align="center">
+    <a href="https://github.com/nisamov">Andrés Ruslan Abadías Otal</a> | 15/05/2026
+</p>
+
+## 1. Información General y Alcance
+- Objetvos:
+    - Revisión de puertos en red
+    - Revisión de protocolos de seguridad implementados
+    - Análisis de registros del sistema
+    - Documentación de vulnerabilidades
+- Inventario de Activos:
+    - ISO_Server_Entorno1_UbuntuServer2204: `192.168.37.1/24` - **Objetivo**
+        - Sistema Operativo: Linux
+        - Hostname: Ubuntu22
+        - Versión Kernel: 6.8.0-110-generic
+        - Versión Distribución: #110~22.04.1-Ubuntu
+        - Fecha Compilación: Fri Mar 27 12:43:08 UTC
+        - Arquitectura: x86_64 GNU/Linux
+    > ```sh
+    > # Comando:
+    > # Output información del sistema
+    > uname -a
+    > ```
+    - ISO_Cliente_Entorno1_UbuntuDesktop2205: `192.168.37.*/24 (DHCP)` - **WorkStation**
+
+## 2. Configuración del Sistema y Hardening
+Paquetes instalados en el equipo:
+- `nfs-common 2026-05-08 amd64`
+> ```sh
+> # Comando:
+> # Revisión de archivos con filtrado por instalación
+> grep " install " /var/log/dpkg.log
+> ```
+
+Estado de servicio y actualizaciones automáticas de seguridad:
+- ii `unattended-upgrades`
+- ty `upgrades`
+- `2.8ubuntu1`
+> ```sh
+> # Comando
+> # Revisión de paquetes instalados automaticamente
+> dpkg -l | grep unattended-upgrades
+> ```
+
+Revisión de servicio para actualizaciones de seguridad automáticas:
+- Estado: `active(running)`
+> ```sh
+> # Comando
+> # Revisión de estado del servicio
+> sudo systemctl status unattended-upgrades
+> ```
+
+Revisión de configuración para actualizaciones automáticas:
+- Estado: Linea no comentada, funcionamiento correcto.
+> ```sh
+> # Comando
+> sudo cat /etc/apt/apt.conf.d/50unattended-upgrades | grep -E "Allowed-Origins|Origin"
+> ```
+
+## 3. Control de Acceso y Autenticación
+### 3.1 Control de Usuarios del Sistema
+Usuarios con privilegios root: `root`
+> ```sh
+> # Comando:
+> # Revisión de usuarios con privilegio root
+> awk -F: '($3 == 0) {print $1}' /etc/passwd
+> ```
+
+Usuarios con shell activa:
+- root: x :0:0:root:/root:/bin/bash
+- isard: x :1000:1000:Isard:/home/isard:/bin/bash
+> ```sh
+> # Comando:
+> # Listar usuarios con shell activa
+> grep -E '/bin/bash|/bin/sh' /etc/passwd
+> ```
+
+### 3.2 Control de Grupos del Sistema
+Usuarios con el poder de elevar privilegios: `isard`
+> ```sh
+> # Comando:
+> getent group sudo
+> ```
+- sudo: x :27:isard
+
+### 3.3 Control de Registros de Acceso
+
+## 4. Auditoría de Eventos (Logs)
+Revisión intentos de sesión fallidos: `Null`
+> ```sh
+> # Comando:
+> sudo lastb | head -n 10
+> ```
+
+Revisión accesos de sesión existosos: `Null`
+> ```sh
+> # Comando:
+> last | head -n 10
+> ```
+
+## 5. Red y Cortafuegos
+
+### 5.1 Puertos en Red
+Se han detectado los siguientes puertos abiertos:
+| Protocolo | UDP | UDP | UDP | UDP | UDP | UDP | UDP | UDP | TCP | TCP | TCP | TCP | TCP | TCP |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Puerto** | 60735 | 53 | 111 | 775 | 5353 | 49526 | 42689 | 56523 | 55115 | 631 | 111 | 53 | 57801 | 80 |
+| **Proceso** | avahi-daemon | systemd-resolve | rpcbind | rpc.statd | avahi-daemon | avahi-daemon | rpc.statd | rpc.statd | rpc.statd | cupsd | rpcbind | systemd-resolve | rpc.statd | apache2 |
+
+Servicios en uso:
+- rpcbind y rpc.statd (NFS).
+- apache2 (80).
+- avahi-daemon (5353/60735).
+- cupsd (631).
+> ```sh
+> # Comando:
+> # Revisar todos los procesos que están escuchando la red
+> sudo ss -tunlp
+> ```
+
+### 5.2 Cortafuegos
+Se ha revisado el estado del cortafuegos `ufw`, siendo encontrado como activo en proceso.
+> Comando: `sudo ufw status`
+- Resultado: `inactive`
+> Comando: `sudo systemctl status ufw`
+- Resultado: `Active(exited)`
+
+Se ha revisado la configuración de las nftables, encontrándose estas sin reglas registradas.
+> Comando: `sudo cat /etc/nftables.conf`
+> ```conf
+> flush ruleset
+> table inet filter {
+>         chain input {
+>                  type filter hook input priority 0;
+>         }
+>         chain forward {
+>                  type filter hook forward priority 0;
+>         }
+>         chain output {
+>                   type filter hook output priority 0;
+>         }
+> }
+> ```
+
+## 6. Tareas Automáticas y Procesos
+
+### 6.1 Tareas Automáticas
+No se han detectado tareas programadas en el servicio cron.
+> ```sh
+> # Comando: 
+> # Revisión lista de tareas tanto de isard como de root
+> crontab -l && sudo crontab -l
+> ```
+
+### 6.2 Procesos
+El servicio org.bluez (servicio de conexión por Bluetooth) falla en iniciar por tiempo de espera.
+> `cd /var/log && cat auth.log | grep Failed`
+
+Mútiples errores de sistema:
+- Proceso con ID(1411) no existente
+- Falta de permisos para para recibir entrada de geolocalización, proceso con ID(1703) no existente
+- El constructor del archivo `/usr/share/applicatins/vim.desktop` ha devuelto una salida NULL.
+- El `this.actor` de GNOME-Shell es NULL.
+> `cd /var/log && sudo cat syslog | grep Error`
+
+## 7. Conclusiones e Informe de Hallazgos
+
+Tras analizar el entorno, se presentan los siguientes hallazgos clasificados por riesgo:
+
+1. **Riesgo Crítico - Cortafuegos Desactivado (`ufw` e `nftables`):** El firewall del sistema operativo está completamente inactivo y carece de reglas. La máquina está expuesta a cualquier escaneo o ataque desde la red interna.
+2. **Riesgo Medio - Superficie de Ataque Elevada (Servicios Innecesarios):** Se detectan servicios activos impropios de un servidor de producción optimizado, tales como `cupsd` (impresión), `avahi-daemon` (descubrimiento de red) y trazas de `bluez` (Bluetooth/Entorno gráfico).
+
+**Recomendaciones Preventivas Inmediatas:**
+- **Habilitar UFW:** Ejecutar `sudo ufw allow 22/tcp && sudo ufw allow 80/tcp && sudo ufw enable` para denegar todo el tráfico entrante excepto SSH y HTTP.
+- **Minimizar el Sistema:** Deshabilitar y enmascarar servicios innecesarios:
+  `sudo systemctl disable --now cups avahi-daemon`
+
+## 8. Recursos y Herramientas Utilizadas
+
+### Herramientas Utilizadas
+Se han usado comandos internos del sistema para los análisis realizados.
+
+### Recursos Utilizados
+- Repositorio de apuntes personal [LinuxCommands](https://github.com/nisamov/LinuxCommands)
+- [Buscador integrado](https://nisamov.github.io/LinuxCommands/search.html) del repositorio previo

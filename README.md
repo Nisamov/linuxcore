@@ -57,18 +57,6 @@ Esta documentación está organizada en los siguientes dominios principales:
 - **Forense y Análisis**: Análisis de procesos, servicios e investigación de memoria
 - **Cumplimiento y Estándares**: Cumplimiento de estandares de seguridad informática
 
-### Tecnologías Modernas
-- **Contenedorización**: Arquitectura Docker y uso
-- **Orquestación**: Patrones de despliegue Kubernetes
-- **Virtualización**: Hipervisores y gestión de VM
-- **Infraestructura Cloud**: Estrategias de despliegue
-
-### Recursos Prácticos
-- **Labs y Ejercicios**: Módulos de aprendizaje práctico
-- **Automatización**: Bash, Python y scripting
-- **Referencia de Comandos**: Herramientas y utilidades esenciales
-- **Guías de Solución de Problemas**: Problemas comunes y soluciones
-
 ---
 
 ## Estructura de los comandos
@@ -99,12 +87,6 @@ Esta es la estructura del cuerpo de los comandos en formato `json`:
       "rhel_centos": "sudo dnf install comando -y"
     }
   },
-  "relaciones": [
-    {
-      "tema": "Fundamentos de Firewall",
-      "ruta": "/core/permissions_model/ejemplo"
-    }
-  ],
   "ejemplos": [
     {
       "uso": "sudo comando -h",
