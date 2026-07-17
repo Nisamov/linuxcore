@@ -1,1 +1,95 @@
-{}
+{
+  "comando": "pvmove",
+  "descripcion": "Mueve los extents físicos (PEs) asignados de un volumen físico (PV) origen a uno o más volúmenes físicos destino. Permite la migración de datos en vivo mientras los volúmenes lógicos permanecen en línea y accesibles.[reference:3][reference:4][reference:5]",
+  "categoria": ["commands", "system_administration", "lvm"],
+  "estructura": "pvmove [opciones] [SourcePhysicalVolume[:PE[-PE]...] [DestinationPhysicalVolume[:PE[-PE]...]...]]",
+  "opciones": [
+    {
+      "parametro": ["--abort"],
+      "descripcion": "Aborta cualquier operación de movimiento en progreso. Dependiendo de si se usó la opción --atomic, los volúmenes lógicos pueden permanecer en el origen o quedar parcialmente movidos.[reference:6][reference:7][reference:8]"
+    },
+    {
+      "parametro": ["--atomic"],
+      "descripcion": "Realiza el movimiento de forma atómica. Si se aborta, todos los volúmenes lógicos permanecen en el volumen físico origen.[reference:9][reference:10]"
+    },
+    {
+      "parametro": ["-b", "--background"],
+      "descripcion": "Ejecuta el proceso de movimiento en segundo plano.[reference:11][reference:12]"
+    },
+    {
+      "parametro": ["-i", "--interval", "Seconds"],
+      "descripcion": "Reporta el progreso del movimiento como un porcentaje en intervalos regulares de tiempo (en segundos).[reference:13][reference:14]"
+    },
+    {
+      "parametro": ["-n", "--name", "LogicalVolume"],
+      "descripcion": "Mueve solo los extents que pertenecen al volumen lógico (LV) especificado, en lugar de todos los extents asignados del volumen físico origen.[reference:15][reference:16]"
+    },
+    {
+      "parametro": ["--noudevsync"],
+      "descripcion": "Deshabilita la sincronización con udev. El proceso no esperará notificaciones de udev, útil si udev no está en ejecución.[reference:17][reference:18]"
+    },
+    {
+      "parametro": ["--alloc", "AllocationPolicy"],
+      "descripcion": "Define la política de asignación para los nuevos extents. Los valores posibles incluyen: contiguous, cling, cling_by_tags, normal, anywhere, inherit.[reference:19][reference:20]"
+    },
+    {
+      "parametro": ["-d", "--debug"],
+      "descripcion": "Activa el modo de depuración, mostrando información detallada para diagnóstico.[reference:21][reference:22]"
+    },
+    {
+      "parametro": ["-h", "--help"],
+      "descripcion": "Muestra un mensaje de ayuda con las opciones disponibles y finaliza.[reference:23][reference:24]"
+    },
+    {
+      "parametro": ["-q", "--quiet"],
+      "descripcion": "Suprime la salida de mensajes no esenciales.[reference:25]"
+    },
+    {
+      "parametro": ["-t", "--test"],
+      "descripcion": "Realiza una prueba de la operación sin hacer cambios permanentes.[reference:26]"
+    },
+    {
+      "parametro": ["-v", "--verbose"],
+      "descripcion": "Modo detallado; muestra información adicional sobre el progreso y las operaciones realizadas.[reference:27][reference:28]"
+    },
+    {
+      "parametro": ["-y", "--yes"],
+      "descripcion": "Responde 'sí' automáticamente a todas las preguntas de confirmación.[reference:29]"
+    },
+    {
+      "parametro": ["--version"],
+      "descripcion": "Muestra la versión del programa y finaliza.[reference:30]"
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install lvm2 -y",
+      "arch_linux": "sudo pacman -S lvm2",
+      "rhel_centos": "sudo dnf install lvm2 -y"
+    }
+  },
+  "ejemplos": [
+    {
+      "uso": "pvmove /dev/sdb1",
+      "explicacion": "Mueve todos los extents físicos usados en /dev/sdb1 a otros extents libres en el mismo grupo de volúmenes.[reference:31]"
+    },
+    {
+      "uso": "pvmove /dev/sdb1 /dev/sdc1",
+      "explicacion": "Mueve todos los extents físicos de /dev/sdb1 al volumen físico destino /dev/sdc1.[reference:32]"
+    },
+    {
+      "uso": "pvmove -n mi_lv /dev/sdb1 /dev/sdc1",
+      "explicacion": "Mueve solo los extents pertenecientes al volumen lógico 'mi_lv' desde /dev/sdb1 hacia /dev/sdc1.[reference:33]"
+    },
+    {
+      "uso": "pvmove --abort",
+      "explicacion": "Aborta cualquier operación de pvmove que esté en progreso.[reference:34]"
+    },
+    {
+      "uso": "pvmove -i 5 /dev/sdb1",
+      "explicacion": "Mueve los extents de /dev/sdb1 y muestra el progreso cada 5 segundos.[reference:35]"
+    }
+  ]
+}

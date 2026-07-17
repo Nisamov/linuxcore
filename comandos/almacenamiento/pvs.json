@@ -1,1 +1,203 @@
-{}
+{
+  "comando": "pvs",
+  "descripcion": "Muestra información formateada sobre volúmenes físicos (PVs) en el sistema, incluyendo su tamaño, uso, atributos y más.",
+  "categoria": ["commands", "system_administration", "lvm"],
+  "estructura": "pvs [opciones] [PV|Tag...]",
+  "opciones": [
+    {
+      "parametro": ["-a", "--all"],
+      "descripcion": "Muestra información sobre dispositivos que no han sido inicializados por LVM, es decir, que no son PVs.[reference:0][reference:1]"
+    },
+    {
+      "parametro": ["-A", "--allpvs"],
+      "descripcion": "Muestra información sobre PVs fuera del archivo de dispositivos. Combínalo con -a|--all para incluir dispositivos que no son PVs.[reference:2]"
+    },
+    {
+      "parametro": ["-o", "--options", "String"],
+      "descripcion": "Lista ordenada y separada por comas de las columnas a mostrar. Precede la lista con '+' para añadir a la selección predeterminada. Usa -o help para ver la lista completa de columnas disponibles.[reference:3]"
+    },
+    {
+      "parametro": ["-O", "--sort", "String"],
+      "descripcion": "Lista ordenada y separada por comas de columnas por las que ordenar. Reemplaza la selección predeterminada. Precede cualquier columna con '-' para orden inverso.[reference:4]"
+    },
+    {
+      "parametro": ["-S", "--select", "String"],
+      "descripcion": "Selecciona informes para PVs que coincidan con los criterios de selección.[reference:5]"
+    },
+    {
+      "parametro": ["--segments"],
+      "descripcion": "Produce una línea de salida para cada asignación contigua de espacio en cada Volumen Físico, mostrando el inicio (pvseg_start) y la longitud (pvseg_size) en unidades de extensiones físicas.[reference:6]"
+    },
+    {
+      "parametro": ["--aligned"],
+      "descripcion": "Usar con --separator para alinear las columnas de salida.[reference:7][reference:8]"
+    },
+    {
+      "parametro": ["--binary"],
+      "descripcion": "Usa valores binarios '0' o '1' en lugar de valores literales descriptivos para columnas que tienen exactamente dos valores válidos.[reference:9]"
+    },
+    {
+      "parametro": ["--nameprefixes"],
+      "descripcion": "Añade un prefijo 'LVM2_' más el nombre del campo a la salida. Útil con --noheadings para producir una lista de pares campo=valor.[reference:10]"
+    },
+    {
+      "parametro": ["--noheadings"],
+      "descripcion": "Suprime la línea de encabezados que normalmente es la primera línea de salida. Útil si se procesa la salida con grep.[reference:11]"
+    },
+    {
+      "parametro": ["--nosuffix"],
+      "descripcion": "Suprime el sufijo en los tamaños de salida. Usar con --units (excepto h y H) si se procesa la salida.[reference:12]"
+    },
+    {
+      "parametro": ["--rows"],
+      "descripcion": "Muestra las columnas como filas.[reference:13]"
+    },
+    {
+      "parametro": ["--separator", "String"],
+      "descripcion": "Cadena a usar para separar cada columna. Útil si se procesa la salida con grep.[reference:14]"
+    },
+    {
+      "parametro": ["--unbuffered"],
+      "descripcion": "Produce la salida inmediatamente sin ordenar o alinear las columnas correctamente.[reference:15]"
+    },
+    {
+      "parametro": ["--units", "[Number]r|R|h|H|b|B|s|S|k|K|m|M|g|G|t|T|p|P|e|E"],
+      "descripcion": "Todos los tamaños se muestran en estas unidades: (h)uman-readable, (b)ytes, (s)ectors, (k)ilobytes, (m)egabytes, (g)igabytes, (t)erabytes, (p)etabytes, (e)xabytes.[reference:16]"
+    },
+    {
+      "parametro": ["--unquoted"],
+      "descripcion": "Produce valores sin comillas en el modo de informe.[reference:17]"
+    },
+    {
+      "parametro": ["--foreign"],
+      "descripcion": "Reporta/muestra VGs extranjeros que de otro modo serían omitidos.[reference:18]"
+    },
+    {
+      "parametro": ["--shared"],
+      "descripcion": "Reporta/muestra VGs compartidos que de otro modo serían omitidos.[reference:19]"
+    },
+    {
+      "parametro": ["--readonly"],
+      "descripcion": "Ejecuta el comando en modo de solo lectura.[reference:20]"
+    },
+    {
+      "parametro": ["--ignorelockingfailure"],
+      "descripcion": "Permite que un comando continúe con operaciones de metadatos de solo lectura después de fallos de bloqueo.[reference:21]"
+    },
+    {
+      "parametro": ["--reportformat", "basic|json"],
+      "descripcion": "Anula el formato de salida actual para los informes. 'basic' es el formato original con columnas y filas. 'json' produce la salida en formato JSON.[reference:22]"
+    },
+    {
+      "parametro": ["--configreport", "log|vg|lv|pv|pvseg|seg"],
+      "descripcion": "Define la configuración del informe para el tipo de informe especificado. Ver lvmreport(7).[reference:23][reference:24]"
+    },
+    {
+      "parametro": ["-d", "--debug"],
+      "descripcion": "Establece el nivel de depuración. Puede repetirse de 1 a 6 veces para aumentar el detalle.[reference:25]"
+    },
+    {
+      "parametro": ["-h", "--help"],
+      "descripcion": "Muestra la ayuda y finaliza.[reference:26]"
+    },
+    {
+      "parametro": ["--longhelp"],
+      "descripcion": "Muestra la ayuda larga.[reference:27]"
+    },
+    {
+      "parametro": ["-q", "--quiet"],
+      "descripcion": "Suprime la salida y los mensajes de registro.[reference:28]"
+    },
+    {
+      "parametro": ["-t", "--test"],
+      "descripcion": "Modo de prueba. Los comandos no actualizarán los metadatos.[reference:29]"
+    },
+    {
+      "parametro": ["-v", "--verbose"],
+      "descripcion": "Establece el nivel verboso. Puede repetirse para aumentar el detalle.[reference:30]"
+    },
+    {
+      "parametro": ["-y", "--yes"],
+      "descripcion": "No pregunta para confirmar de forma interactiva, sino que siempre asume la respuesta 'sí'.[reference:31]"
+    },
+    {
+      "parametro": ["--version"],
+      "descripcion": "Muestra la información de la versión.[reference:32]"
+    },
+    {
+      "parametro": ["--commandprofile", "String"],
+      "descripcion": "El perfil de comando a usar para la configuración del comando.[reference:33]"
+    },
+    {
+      "parametro": ["--config", "String"],
+      "descripcion": "Configuración de ajustes para el comando. Estos anulan la configuración de lvm.conf(5).[reference:34]"
+    },
+    {
+      "parametro": ["--devices", "PV"],
+      "descripcion": "Restringe los dispositivos visibles y accesibles para el comando. Puede repetirse o acepta una lista separada por comas.[reference:35]"
+    },
+    {
+      "parametro": ["--devicesfile", "String"],
+      "descripcion": "Un archivo que enumera los dispositivos que LVM debe usar. Debe existir en /etc/lvm/devices/.[reference:36][reference:37]"
+    },
+    {
+      "parametro": ["--driverloaded", "y|n"],
+      "descripcion": "Si se establece a 'no', el comando no intentará usar device-mapper. Para pruebas y depuración.[reference:38]"
+    },
+    {
+      "parametro": ["--journal", "String"],
+      "descripcion": "Registra información en el diario systemd. Los valores posibles incluyen: 'command', 'output', 'debug'.[reference:39]"
+    },
+    {
+      "parametro": ["--lockopt", "String"],
+      "descripcion": "Se usa para pasar opciones para casos especiales a lvmlockd.[reference:40]"
+    },
+    {
+      "parametro": ["--nohints"],
+      "descripcion": "No usa el archivo de sugerencias para localizar dispositivos para PVs.[reference:41]"
+    },
+    {
+      "parametro": ["--nolocking"],
+      "descripcion": "Deshabilita el bloqueo.[reference:42]"
+    },
+    {
+      "parametro": ["--profile", "String"],
+      "descripcion": "Un alias para --commandprofile o --metadataprofile, dependiendo del comando.[reference:43]"
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install lvm2 -y",
+      "arch_linux": "sudo pacman -S lvm2",
+      "rhel_centos": "sudo dnf install lvm2 -y"
+    }
+  },
+  "ejemplos": [
+    {
+      "uso": "pvs",
+      "explicacion": "Muestra información básica sobre todos los volúmenes físicos."
+    },
+    {
+      "uso": "pvs -a",
+      "explicacion": "Muestra información incluyendo dispositivos que no son PVs.[reference:44]"
+    },
+    {
+      "uso": "pvs -o pv_name,pv_size,pv_used",
+      "explicacion": "Muestra solo el nombre, tamaño y espacio usado de los PVs.[reference:45]"
+    },
+    {
+      "uso": "pvs --segments",
+      "explicacion": "Muestra una línea por cada segmento contiguo de espacio en cada PV.[reference:46]"
+    },
+    {
+      "uso": "pvs --noheadings --units g",
+      "explicacion": "Muestra los PVs sin encabezados y con tamaños en gigabytes.[reference:47][reference:48]"
+    },
+    {
+      "uso": "pvs --reportformat json",
+      "explicacion": "Muestra la información de los PVs en formato JSON.[reference:49]"
+    }
+  ]
+}
