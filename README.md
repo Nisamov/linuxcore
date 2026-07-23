@@ -4,11 +4,9 @@
 <div align="center">
 <h1>LinuxCore</h1>
 
-**El repositorio definitivo de Linux en Español**
-
 [![MIT License](https://img.shields.io/github/license/nisamov/linuxcore?style=flat-square)](LICENSE) [![Website](https://img.shields.io/badge/website-linuxcore.site-blue?style=flat-square)](https://linuxcore.site/) [![Last Updated](https://img.shields.io/github/last-commit/nisamov/linuxcore?style=flat-square)](https://github.com/nisamov/linuxcore/commits) [![Repository Size](https://img.shields.io/github/repo-size/nisamov/linuxcore?style=flat-square)](.)
 
-**Un repositorio creado con la simple finalidad de aprender sin depender de tutoriales genéricos, cursos de pago o fuentes poco seguras.**
+**Documentación y fundamentos de informática en Español**
 
 </div>
 
