@@ -35,7 +35,7 @@ La base de datos se actualiza automáticamente con cada contribución, mantenien
 
 Esta documentación está organizada en los siguientes dominios principales:
 
-### Fundamentos (`core/`)
+### Fundamentos (`fundamentos/`)
 - Filosofía Linux y Principios de Diseño
 - Proceso de Arranque e Inicialización del Sistema
 - Modelo de Procesos y Programación
@@ -44,14 +44,17 @@ Esta documentación está organizada en los siguientes dominios principales:
 - Usuarios, Grupos y Modelo de Permisos
 - Señales e IPC (Comunicación Inter-Proceso)
 - Entorno Shell y Configuración
+- Teoría sobre la electricidad y aspectos fisicos
 
-### Sistemas (`kernel/`, `networking/`)
-- Arquitectura del Kernel e Internals
+### Sistemas y Servicios (`servicios/`, `tecnologias/`)
+- Arquitectura del Kernel y Servicios
 - Gestión de Procesos y Cambio de Contexto
+
+### Red y Protocolos (`redes/`. `protocolos/`)
 - Protocolos de Red e Implementación de Stack
 - Conceptos TCP/IP y Configuración
 
-### Seguridad (`security/`)
+### Seguridad (`seguridad/`)
 - **Defensiva**: Fortalecimiento, Control de Acceso, Detección de Intrusiones
 - **Ofensiva**: Pruebas de Penetración, Técnicas de Explotación
 - **Forense y Análisis**: Análisis de procesos, servicios e investigación de memoria
@@ -64,18 +67,18 @@ Esta documentación está organizada en los siguientes dominios principales:
 Esta es la estructura del cuerpo de los comandos en formato `json`:
 ```json
 {
-  "comando": "commando",
-  "descripcion": "Descripcion técnica",
-  "categoria": "categoria interna",
-  "estructura": "comando [opciones] otro",
+  "comando": "commando", // "ls"
+  "descripcion": "Descripcion técnica", // "Lista los archivos de la ruta especificada"
+  "categoria": "categoria interna", // "comandos", "archivos"
+  "estructura": "comando [opciones]", // "ls [opciones]"
   "opciones": [
     {
-      "parametro": "-h",
-      "descripcion": "Muestra la ayuda del comando."
+      "parametro": "-h", // "-l", "--list"
+      "descripcion": "Muestra la ayuda del comando." // "Lista todos los elementos de forma ordenada"
     },
     {
-      "parametro": "ejemplo",
-      "descripcion": "Un simple comando de ejemplo."
+      "parametro": "-r", // "-a", "--all"
+      "descripcion": "Eliminacion de sector." // "Muestra todo sin ignorar las entradas '.' y '..'"
     }
   ],
   "instalacion": {
@@ -99,6 +102,13 @@ Estando en este formato, es posible filtras los comandos según sus parámetros,
 
 > [!IMPORTANT]
 > El proyecto dispone de una plataforma web oficial accesible en https://linuxcore.site/. Dicha plataforma sincroniza su base de datos directamente con este repositorio, aplicando las actualizaciones de forma automática tras cada contribución para garantizar la disponibilidad inmediata del contenido más reciente.
+
+## Colaboradores
+<div align="center">
+  <a href="https://github.com/nisamov/linuxcore/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=nisamov/linuxcore" alt="Contribuyentes de LinuxCore" />
+  </a>
+</div>
 
 ---
 
