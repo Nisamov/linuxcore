@@ -1,1 +1,91 @@
-{}
+{
+  "comando": "badblocks",
+  "descripcion": "Busca bloques defectuosos en un dispositivo (generalmente una partición de disco) mediante pruebas de lectura, escritura o lectura-escritura no destructiva.",
+  "categoria": "almacenamiento",
+  "estructura": "badblocks [opciones] dispositivo [último_bloque] [primer_bloque]",
+  "opciones": [
+    {
+      "parametro": "-b block_size",
+      "descripcion": "Especifica el tamaño de los bloques en bytes. El valor predeterminado es 1024."
+    },
+    {
+      "parametro": "-c blocks_at_once",
+      "descripcion": "Número de bloques que se prueban a la vez. El valor predeterminado es 64."
+    },
+    {
+      "parametro": "-d read_delay_factor",
+      "descripcion": "Si se pasa y es distinto de cero, provoca una pausa entre lecturas si no hubo errores; el retraso se calcula como un porcentaje del tiempo que tomó la operación de lectura anterior."
+    },
+    {
+      "parametro": "-e max_bad_blocks",
+      "descripcion": "Especifica un número máximo de bloques defectuosos antes de abortar la prueba. El valor predeterminado es 0 (continuar hasta el final)."
+    },
+    {
+      "parametro": "-f",
+      "descripcion": "Fuerza la prueba incluso si el dispositivo está montado (peligroso, puede dañar el sistema de archivos)."
+    },
+    {
+      "parametro": "-i input_file",
+      "descripcion": "Lee una lista de bloques defectuosos conocidos desde un archivo y omite su prueba. Si se especifica '-' como archivo, lee desde la entrada estándar."
+    },
+    {
+      "parametro": "-n",
+      "descripcion": "Usa el modo de lectura-escritura no destructiva (no combinar con -w)."
+    },
+    {
+      "parametro": "-o output_file",
+      "descripcion": "Escribe la lista de bloques defectuosos en el archivo especificado. Si no se usa, la lista se muestra en la salida estándar."
+    },
+    {
+      "parametro": "-p num_passes",
+      "descripcion": "Repite el escaneo hasta que no se descubran nuevos bloques en num_passes pasadas consecutivas. El valor predeterminado es 0 (una sola pasada)."
+    },
+    {
+      "parametro": "-s",
+      "descripcion": "Muestra el progreso del escaneo indicando el porcentaje aproximado completado de la pasada actual."
+    },
+    {
+      "parametro": "-t test_pattern",
+      "descripcion": "Especifica un patrón de prueba (valor numérico o la palabra 'random') para leer y escribir en los bloques. Se puede usar múltiples veces para varios patrones."
+    },
+    {
+      "parametro": "-v",
+      "descripcion": "Modo verbose (detallado). Muestra el número de errores de lectura, escritura y corrupción de datos en stderr."
+    },
+    {
+      "parametro": "-w",
+      "descripcion": "Usa el modo de prueba de escritura (escribe patrones 0xaa, 0x55, 0xff, 0x00 en cada bloque y los verifica). ¡Elimina datos! No combinar con -n."
+    },
+    {
+      "parametro": "-B",
+      "descripcion": "Usa E/S con búfer y no usa E/S directa, incluso si está disponible."
+    },
+    {
+      "parametro": "-X",
+      "descripcion": "Bandera interna usada solo por e2fsck y mke2fs. Omite la verificación de seguridad de dispositivo en uso."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install e2fsprogs -y",
+      "arch_linux": "sudo pacman -S e2fsprogs",
+      "rhel_centos": "sudo dnf install e2fsprogs -y"
+    }
+  },
+  "ejemplos": [
+    {
+      "uso": "sudo badblocks -s -v /dev/sda",
+      "explicacion": "Realiza una prueba de solo lectura en el dispositivo /dev/sda, mostrando el progreso y detalles en modo verbose."
+    },
+    {
+      "uso": "sudo badblocks -n -o bloques_defectuosos.txt /dev/sdb1",
+      "explicacion": "Realiza una prueba no destructiva en la partición /dev/sdb1 y guarda la lista de bloques defectuosos en el archivo bloques_defectuosos.txt."
+    },
+    {
+      "uso": "sudo badblocks -w -p 2 /dev/sdc",
+      "explicacion": "Realiza una prueba destructiva de escritura en /dev/sdc, repitiendo el escaneo hasta que no haya nuevos bloques en 2 pasadas consecutivas."
+    }
+  ]
+}

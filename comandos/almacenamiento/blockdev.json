@@ -1,1 +1,127 @@
-{}
+{
+  "comando": "blockdev",
+  "descripcion": "Permite llamar a funciones ioctl del kernel desde la línea de comandos para obtener y establecer parámetros de dispositivos de bloques (tamaño, solo lectura, alineación, lectura anticipada, etc.).",
+  "categoria": "almacenamiento",
+  "estructura": "blockdev [opciones] [dispositivo...]",
+  "opciones": [
+    {
+      "parametro": "--getro",
+      "descripcion": "Muestra el estado de solo lectura (1 si es solo lectura, 0 si es lectura/escritura) del dispositivo."
+    },
+    {
+      "parametro": "--setro",
+      "descripcion": "Establece el dispositivo como solo lectura."
+    },
+    {
+      "parametro": "--setrw",
+      "descripcion": "Establece el dispositivo como lectura/escritura (quita el modo solo lectura)."
+    },
+    {
+      "parametro": "--getss",
+      "descripcion": "Muestra el tamaño del sector lógico del dispositivo (en bytes)."
+    },
+    {
+      "parametro": "--getpbsz",
+      "descripcion": "Muestra el tamaño del bloque físico del dispositivo (en bytes)."
+    },
+    {
+      "parametro": "--getiomin",
+      "descripcion": "Muestra el tamaño mínimo de E/S del dispositivo (en bytes)."
+    },
+    {
+      "parametro": "--getioopt",
+      "descripcion": "Muestra el tamaño óptimo de E/S del dispositivo (en bytes)."
+    },
+    {
+      "parametro": "--getalignoff",
+      "descripcion": "Muestra el desplazamiento de alineación del dispositivo (en bytes)."
+    },
+    {
+      "parametro": "--getmaxsect",
+      "descripcion": "Muestra el número máximo de sectores por solicitud de E/S."
+    },
+    {
+      "parametro": "--getbsz",
+      "descripcion": "Muestra el tamaño de bloque del dispositivo (tamaño de búfer) en bytes."
+    },
+    {
+      "parametro": "--setbsz block_size",
+      "descripcion": "Establece el tamaño de bloque del dispositivo (en bytes) para operaciones de búfer."
+    },
+    {
+      "parametro": "--getsz",
+      "descripcion": "Muestra el tamaño total del dispositivo en sectores de 512 bytes (tamaño de bloques de 512 bytes)."
+    },
+    {
+      "parametro": "--getsize",
+      "descripcion": "Muestra el tamaño total del dispositivo en sectores de 512 bytes (similar a --getsz)."
+    },
+    {
+      "parametro": "--getsize64",
+      "descripcion": "Muestra el tamaño total del dispositivo en bytes (formato de 64 bits)."
+    },
+    {
+      "parametro": "--getra",
+      "descripcion": "Muestra el valor de lectura anticipada (read-ahead) del dispositivo (en sectores de 512 bytes)."
+    },
+    {
+      "parametro": "--setra read_ahead_value",
+      "descripcion": "Establece el valor de lectura anticipada (read-ahead) del dispositivo (en sectores de 512 bytes)."
+    },
+    {
+      "parametro": "--getfra",
+      "descripcion": "Muestra el valor de lectura anticipada del sistema de archivos (filesystem read-ahead) en sectores de 512 bytes."
+    },
+    {
+      "parametro": "--flushbufs",
+      "descripcion": "Vacía todos los búferes del dispositivo (fuerza la escritura de datos en caché al disco)."
+    },
+    {
+      "parametro": "--rereadpt",
+      "descripcion": "Vuelve a leer la tabla de particiones del dispositivo (sin necesidad de reiniciar)."
+    },
+    {
+      "parametro": "--getdiscardzeroes",
+      "descripcion": "Muestra si el dispositivo soporta que las operaciones de descarte (discard/TRIM) devuelvan ceros (1 si es soportado, 0 si no)."
+    },
+    {
+      "parametro": "--report",
+      "descripcion": "Muestra un informe detallado con todas las propiedades disponibles para los dispositivos especificados (o para todos si no se especifica ninguno)."
+    },
+    {
+      "parametro": "-v",
+      "descripcion": "Modo verbose (detallado). Muestra información adicional sobre las operaciones realizadas."
+    },
+    {
+      "parametro": "-h",
+      "descripcion": "Muestra la ayuda del comando con un resumen de todas las opciones."
+    },
+    {
+      "parametro": "-V",
+      "descripcion": "Muestra la versión del comando blockdev."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install util-linux -y",
+      "arch_linux": "sudo pacman -S util-linux",
+      "rhel_centos": "sudo dnf install util-linux -y"
+    }
+  },
+  "ejemplos": [
+    {
+      "uso": "sudo blockdev --getsize64 /dev/sda",
+      "explicacion": "Obtiene el tamaño total en bytes del dispositivo /dev/sda."
+    },
+    {
+      "uso": "sudo blockdev --setro /dev/sdb1 && sudo blockdev --getro /dev/sdb1",
+      "explicacion": "Establece la partición /dev/sdb1 como solo lectura y luego verifica que el cambio se haya aplicado correctamente."
+    },
+    {
+      "uso": "sudo blockdev --report /dev/sda /dev/sdb",
+      "explicacion": "Genera un informe detallado con todas las propiedades (tamaño, sectores, alineación, E/S, etc.) de los dispositivos /dev/sda y /dev/sdb."
+    }
+  ]
+}

@@ -1,1 +1,115 @@
-{}
+{
+  "comando": "cfdisk",
+  "descripcion": "Herramienta interactiva basada en curses para manipular tablas de particiones en dispositivos de bloques. Permite crear, eliminar, modificar, cambiar tipos de particiones y reescribir la tabla de particiones con una interfaz visual amigable.",
+  "categoria": "almacenamiento",
+  "estructura": "cfdisk [opciones] [dispositivo]",
+  "opciones": [
+    {
+      "parametro": "-a, --arrow",
+      "descripcion": "Usa el cursor de flecha en la interfaz (obsoleto, se mantiene por compatibilidad)."
+    },
+    {
+      "parametro": "-z, --zero",
+      "descripcion": "Escribe ceros al inicio del dispositivo antes de crear una nueva tabla de particiones (elimina cualquier firma existente)."
+    },
+    {
+      "parametro": "-c, --cylinders",
+      "descripcion": "Especifica el número de cilindros del dispositivo (obsoleto, se ignora)."
+    },
+    {
+      "parametro": "-h, --heads",
+      "descripcion": "Especifica el número de cabezas del dispositivo (obsoleto, se ignora)."
+    },
+    {
+      "parametro": "-s, --sectors",
+      "descripcion": "Especifica el número de sectores por pista (obsoleto, se ignora)."
+    },
+    {
+      "parametro": "-S, --sector-size",
+      "descripcion": "Especifica el tamaño de sector en bytes (obsoleto, se usa el tamaño del dispositivo)."
+    },
+    {
+      "parametro": "-b, --bytes",
+      "descripcion": "Forza el uso del tamaño de sector físico en lugar del lógico (obsoleto)."
+    },
+    {
+      "parametro": "-C, --cylinders",
+      "descripcion": "Define el número de cilindros (deprecado, use -c en su lugar)."
+    },
+    {
+      "parametro": "-H, --heads",
+      "descripcion": "Define el número de cabezas (deprecado, use -h en su lugar)."
+    },
+    {
+      "parametro": "-S, --sectors-per-track",
+      "descripcion": "Define el número de sectores por pista (deprecado, use -s en su lugar)."
+    },
+    {
+      "parametro": "-L, --color[=when]",
+      "descripcion": "Colorea la salida. Los valores posibles son: 'auto' (predeterminado), 'never' o 'always'."
+    },
+    {
+      "parametro": "-r, --read-only",
+      "descripcion": "Abre el dispositivo en modo solo lectura (no se pueden realizar cambios)."
+    },
+    {
+      "parametro": "-V, --version",
+      "descripcion": "Muestra la versión de cfdisk y sale."
+    },
+    {
+      "parametro": "-l, --label <tipo>",
+      "descripcion": "Especifica el tipo de tabla de particiones a usar (por ejemplo: 'dos' para MBR, 'gpt' para GUID, 'sun', 'sgi', 'bsd', 'mac', etc.)."
+    },
+    {
+      "parametro": "-t, --type <tipo>",
+      "descripcion": "Alias de -l. Especifica el tipo de tabla de particiones."
+    },
+    {
+      "parametro": "-u, --units <unidad>",
+      "descripcion": "Define la unidad de visualización para los tamaños de partición. Valores: 's' (sectores), 'S' (sectores de 512 bytes), 'B' (bytes), 'C' (cilindros), 'M' (MB), 'G' (GB), etc."
+    },
+    {
+      "parametro": "-P, --print",
+      "descripcion": "Imprime la tabla de particiones actual en la salida estándar (sin interfaz interactiva) y sale inmediatamente."
+    },
+    {
+      "parametro": "-n, --no-bounds",
+      "descripcion": "No verifica los límites de las particiones (permite crear particiones que no estén alineadas correctamente)."
+    },
+    {
+      "parametro": "-f, --force",
+      "descripcion": "Fuerza la escritura de la tabla de particiones incluso si el kernel reporta que el dispositivo está en uso o si hay advertencias de seguridad."
+    },
+    {
+      "parametro": "-h, --help",
+      "descripcion": "Muestra la ayuda del comando con un resumen de todas las opciones y sale."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install util-linux -y",
+      "arch_linux": "sudo pacman -S util-linux",
+      "rhel_centos": "sudo dnf install util-linux -y"
+    }
+  },
+  "ejemplos": [
+    {
+      "uso": "sudo cfdisk /dev/sda",
+      "explicacion": "Abre la interfaz interactiva para editar la tabla de particiones del dispositivo /dev/sda (MBR por defecto)."
+    },
+    {
+      "uso": "sudo cfdisk -l gpt /dev/sdb",
+      "explicacion": "Abre cfdisk forzando el uso de una tabla de particiones GPT en el dispositivo /dev/sdb."
+    },
+    {
+      "uso": "sudo cfdisk -P /dev/sdc",
+      "explicacion": "Muestra únicamente la tabla de particiones actual de /dev/sdc en la consola y sale (sin interfaz gráfica)."
+    },
+    {
+      "uso": "sudo cfdisk -z /dev/sdd",
+      "explicacion": "Limpia el inicio del disco /dev/sdd (escribe ceros) y luego crea una nueva tabla de particiones desde cero."
+    }
+  ]
+}

@@ -1,1 +1,107 @@
-{}
+{
+  "comando": "blkid",
+  "descripcion": "Localiza e imprime información de atributos de dispositivos de bloques (UUID, TYPE, LABEL, PARTUUID, etc.) mediante el sondeo de superbloques o el uso de una caché.",
+  "categoria": "almacenamiento",
+  "estructura": "blkid [opciones] [dispositivo...]",
+  "opciones": [
+    {
+      "parametro": "-c cache_file",
+      "descripcion": "Especifica un archivo de caché alternativo (por defecto /etc/blkid.tab o /etc/blkid/blkid.tab)."
+    },
+    {
+      "parametro": "-d",
+      "descripcion": "No codifica caracteres no imprimibles en la salida (modo sin codificación)."
+    },
+    {
+      "parametro": "-D",
+      "descripcion": "Muestra todos los dispositivos, incluidos aquellos que no tienen etiqueta (LABEL) o UUID."
+    },
+    {
+      "parametro": "-g",
+      "descripcion": "Realiza una recolección de basura en el archivo de caché, eliminando entradas de dispositivos inexistentes."
+    },
+    {
+      "parametro": "-h",
+      "descripcion": "Muestra la ayuda del comando con un resumen de opciones."
+    },
+    {
+      "parametro": "-i",
+      "descripcion": "Muestra los límites de E/S (I/O limits) del dispositivo, generalmente usado junto con el sondeo en modo bajo nivel."
+    },
+    {
+      "parametro": "-k",
+      "descripcion": "Mantiene el archivo de caché sin actualizar (no escribe cambios en el disco)."
+    },
+    {
+      "parametro": "-l",
+      "descripcion": "Busca y muestra un solo dispositivo que coincida con el token especificado (usado con -t). Útil para evitar salidas múltiples."
+    },
+    {
+      "parametro": "-L label",
+      "descripcion": "Busca y muestra el dispositivo que tenga la etiqueta (LABEL) exacta especificada."
+    },
+    {
+      "parametro": "-o formato",
+      "descripcion": "Define el formato de salida. Valores posibles: value (solo valores), device (solo dispositivo), udev (formato clave=valor para udev), export (formato exportable), full (todos los atributos), list (formato de lista)."
+    },
+    {
+      "parametro": "-O offset",
+      "descripcion": "Realiza el sondeo en un desplazamiento (offset) específico desde el inicio del dispositivo (en bytes)."
+    },
+    {
+      "parametro": "-p",
+      "descripcion": "Activa el sondeo de superbloque en modo bajo nivel, ignorando por completo la caché y probando directamente el dispositivo."
+    },
+    {
+      "parametro": "-s tag",
+      "descripcion": "Muestra solo la etiqueta (tag) especificada, por ejemplo: UUID, TYPE, LABEL, PARTUUID, PARTLABEL. Se puede usar múltiples veces."
+    },
+    {
+      "parametro": "-S size",
+      "descripcion": "Especifica el tamaño (en bytes) para el sondeo, útil para particiones o imágenes con tamaño fijo."
+    },
+    {
+      "parametro": "-t token",
+      "descripcion": "Busca el dispositivo que coincida con el token dado (p.ej., UUID=xxx, LABEL=yyy, PARTUUID=zzz)."
+    },
+    {
+      "parametro": "-u list",
+      "descripcion": "Filtra los dispositivos por tipo de uso. Lista separada por comas de: filesystem, raid, crypto, etc. (por defecto 'filesystem,raid')."
+    },
+    {
+      "parametro": "-v",
+      "descripcion": "Muestra la versión del comando blkid."
+    },
+    {
+      "parametro": "-w wipe_file",
+      "descripcion": "Escribe el contenido de la caché en el archivo especificado (en lugar del predeterminado)."
+    },
+    {
+      "parametro": "-x",
+      "descripcion": "Muestra todas las etiquetas disponibles para el dispositivo, incluidas las internas (extiende la salida de -o full)."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install util-linux -y",
+      "arch_linux": "sudo pacman -S util-linux",
+      "rhel_centos": "sudo dnf install util-linux -y"
+    }
+  },
+  "ejemplos": [
+    {
+      "uso": "sudo blkid /dev/sda1",
+      "explicacion": "Muestra todos los atributos (UUID, TYPE, LABEL, etc.) de la partición /dev/sda1."
+    },
+    {
+      "uso": "sudo blkid -s UUID -o value /dev/sdb1",
+      "explicacion": "Obtiene únicamente el valor del UUID de /dev/sdb1 y lo imprime en formato simple (sin etiquetas)."
+    },
+    {
+      "uso": "sudo blkid -t LABEL='datos' -l",
+      "explicacion": "Busca el dispositivo que tenga la etiqueta 'datos' y muestra su información, limitando la salida a un solo resultado."
+    }
+  ]
+}

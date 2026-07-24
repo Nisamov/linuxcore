@@ -1,1 +1,119 @@
-{}
+{
+  "comando": "df",
+  "descripcion": "Muestra el espacio disponible y usado en los sistemas de archivos montados. Reporta el uso de disco por partición o sistema de archivos, incluyendo total, usado, disponible, porcentaje de uso y punto de montaje.",
+  "categoria": "almacenamiento",
+  "estructura": "df [opciones] [archivo|directorio|dispositivo...]",
+  "opciones": [
+    {
+      "parametro": "-a, --all",
+      "descripcion": "Incluye sistemas de archivos con tamaño 0 (como /proc, /sys, etc.) que normalmente se omiten."
+    },
+    {
+      "parametro": "-B, --block-size=TAM",
+      "descripcion": "Especifica el tamaño de bloque para la salida (por ejemplo: 1K, 1M, 1G). También se puede usar con sufijos como K, M, G."
+    },
+    {
+      "parametro": "-h, --human-readable",
+      "descripcion": "Muestra los tamaños en formato legible por humanos (usando potencias de 1024: K, M, G, T)."
+    },
+    {
+      "parametro": "-H, --si",
+      "descripcion": "Similar a -h pero usa potencias de 1000 (SI) en lugar de 1024."
+    },
+    {
+      "parametro": "-i, --inodes",
+      "descripcion": "Muestra información de inodos en lugar de bloques (número total, usados, disponibles y porcentaje de uso)."
+    },
+    {
+      "parametro": "-k, --kilobytes",
+      "descripcion": "Muestra los tamaños en bloques de 1024 bytes (equivale a --block-size=1K)."
+    },
+    {
+      "parametro": "-l, --local",
+      "descripcion": "Limita la salida únicamente a sistemas de archivos locales (omite aquellos montados desde red como NFS)."
+    },
+    {
+      "parametro": "-m, --megabytes",
+      "descripcion": "Muestra los tamaños en bloques de 1,048,576 bytes (equivale a --block-size=1M)."
+    },
+    {
+      "parametro": "-P, --portability",
+      "descripcion": "Usa el formato POSIX de salida (ancho fijo y sin columnas de tipo de sistema de archivos)."
+    },
+    {
+      "parametro": "-T, --print-type",
+      "descripcion": "Muestra el tipo de sistema de archivos (ext4, xfs, ntfs, etc.) en una columna adicional."
+    },
+    {
+      "parametro": "-t, --type=TIPO",
+      "descripcion": "Muestra solo los sistemas de archivos del tipo especificado (p.ej., ext4). Se puede usar múltiples veces."
+    },
+    {
+      "parametro": "-x, --exclude-type=TIPO",
+      "descripcion": "Excluye los sistemas de archivos del tipo especificado (opuesto a -t)."
+    },
+    {
+      "parametro": "--sync",
+      "descripcion": "Sincroniza todos los búferes del sistema de archivos antes de consultar los datos (obtiene valores más precisos pero más lentos)."
+    },
+    {
+      "parametro": "--no-sync",
+      "descripcion": "No sincroniza antes de consultar (por defecto, si --sync no se usa)."
+    },
+    {
+      "parametro": "--total",
+      "descripcion": "Agrega una fila final que muestra los totales de todos los sistemas de archivos listados."
+    },
+    {
+      "parametro": "--output[=CAMPO_LIST]",
+      "descripcion": "Personaliza las columnas de salida. Por defecto usa 'source,fstype,size,used,avail,pcent,target'. Campos disponibles: source, fstype, itotal, iused, iavail, ipcent, size, used, avail, pcent, target, file."
+    },
+    {
+      "parametro": "--exclude=PATRÓN",
+      "descripcion": "Excluye los sistemas de archivos cuyo punto de montaje o dispositivo coincida con el patrón (wildcards)."
+    },
+    {
+      "parametro": "-v",
+      "descripcion": "Modo verbose (en algunas versiones, equivalente a --all, pero generalmente obsoleto o sin efecto)."
+    },
+    {
+      "parametro": "-h, --help",
+      "descripcion": "Muestra la ayuda del comando con un resumen de todas las opciones y sale."
+    },
+    {
+      "parametro": "--version",
+      "descripcion": "Muestra la versión de df y sale."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install coreutils -y",
+      "arch_linux": "sudo pacman -S coreutils",
+      "rhel_centos": "sudo dnf install coreutils -y"
+    }
+  },
+  "ejemplos": [
+    {
+      "uso": "df -h",
+      "explicacion": "Muestra el uso de todos los sistemas de archivos montados en formato legible para humanos (con unidades K, M, G)."
+    },
+    {
+      "uso": "df -T /home",
+      "explicacion": "Muestra el tipo de sistema de archivos y el uso de la partición que contiene el directorio /home."
+    },
+    {
+      "uso": "df -i --total /dev/sda1 /dev/sdb1",
+      "explicacion": "Muestra información de inodos para las particiones /dev/sda1 y /dev/sdb1, agregando un total al final."
+    },
+    {
+      "uso": "df -t ext4 -x tmpfs",
+      "explicacion": "Muestra solo sistemas de archivos de tipo ext4, excluyendo aquellos de tipo tmpfs."
+    },
+    {
+      "uso": "df --output=source,size,pcent,target -B M",
+      "explicacion": "Muestra solo las columnas de dispositivo, tamaño en MB, porcentaje y punto de montaje, usando bloques de 1 MB."
+    }
+  ]
+}

@@ -1,1 +1,131 @@
-{}
+{
+  "comando": "btrfs",
+  "descripcion": "Conjunto de herramientas para administrar sistemas de archivos Btrfs. Permite crear y eliminar snapshots y subvolúmenes, desfragmentar archivos, vaciar datos al disco, redimensionar el sistema de archivos, escanear dispositivos y más.",
+  "categoria": "almacenamiento",
+  "estructura": "btrfs [opciones_globales] <grupo> <comando> [opciones] [<args>]",
+  "opciones": [
+    {
+      "parametro": "--help",
+      "descripcion": "Muestra ayuda resumida para todos los subcomandos."
+    },
+    {
+      "parametro": "--version",
+      "descripcion": "Muestra la versión de btrfs-progs."
+    },
+    {
+      "parametro": "-v|--verbose",
+      "descripcion": "Aumenta la verbosidad del subcomando."
+    },
+    {
+      "parametro": "-q|--quiet",
+      "descripcion": "Muestra solo errores."
+    },
+    {
+      "parametro": "--log <level>",
+      "descripcion": "Establece el nivel de registro (default, info, verbose, debug, quiet)."
+    },
+    {
+      "parametro": "--format <formato>",
+      "descripcion": "Formato de salida (text, json) si el subcomando lo soporta."
+    },
+    {
+      "parametro": "--dry-run",
+      "descripcion": "Simula la operación sin realizar cambios."
+    },
+    {
+      "parametro": "balance",
+      "descripcion": "Reequilibra los chunks del sistema de archivos Btrfs entre uno o varios dispositivos. Ver btrfs-balance(8)."
+    },
+    {
+      "parametro": "check",
+      "descripcion": "Realiza una verificación fuera de línea del sistema de archivos Btrfs. Ver btrfs-check(8)."
+    },
+    {
+      "parametro": "device",
+      "descripcion": "Administra los dispositivos del sistema de archivos Btrfs (añadir, eliminar, escanear, etc.). Ver btrfs-device(8). Subcomandos: add [-Kf] <dev>... <path>, remove <dev>... <path>, delete (alias de remove), ready <path>, scan [-du] [dev]..., stats [-zc] <path>|<dev>, usage [-bhmHk...] <path> [<path>...]."
+    },
+    {
+      "parametro": "filesystem",
+      "descripcion": "Gestiona el sistema de archivos Btrfs a nivel global (etiquetas, redimensionado, estadísticas, desfragmentación). Ver btrfs-filesystem(8). Subcomandos: df [-bhH...] <path>, defragment [-c[algo] -r -f -s offset -l len -t size] <file>|<dir>, du [-s --raw --human-readable...] <file>..., label [<dev>] [<newlabel>], resize [--enqueue] [<devid>:][+/-]<size>|<devid>:max <path>, show [-md --raw --human-readable...] [<path>|<uuid>|<device>|<label>], sync <path>, usage [-bhH...] <path> [<path>...]."
+    },
+    {
+      "parametro": "inspect-internal",
+      "descripcion": "Herramientas de depuración para desarrolladores. Ver btrfs-inspect-internal(8)."
+    },
+    {
+      "parametro": "property",
+      "descripcion": "Obtiene o establece una propiedad de un objeto Btrfs. Ver btrfs-property(8)."
+    },
+    {
+      "parametro": "qgroup",
+      "descripcion": "Administra grupos de cuota (qgroup) del sistema de archivos Btrfs. Ver btrfs-qgroup(8)."
+    },
+    {
+      "parametro": "quota",
+      "descripcion": "Administra las cuotas del sistema de archivos Btrfs (habilitar, reescanear, etc.). Ver btrfs-quota(8)."
+    },
+    {
+      "parametro": "receive",
+      "descripcion": "Recibe datos de un subvolumen desde stdin/archivo para restaurar. Ver btrfs-receive(8)."
+    },
+    {
+      "parametro": "replace",
+      "descripcion": "Reemplaza dispositivos Btrfs. Ver btrfs-replace(8)."
+    },
+    {
+      "parametro": "rescue",
+      "descripcion": "Intenta rescatar un sistema de archivos Btrfs dañado. Ver btrfs-rescue(8)."
+    },
+    {
+      "parametro": "restore",
+      "descripcion": "Intenta restaurar archivos desde un sistema de archivos Btrfs dañado. Ver btrfs-restore(8)."
+    },
+    {
+      "parametro": "scrub",
+      "descripcion": "Realiza un scrub (verificación y reparación) del sistema de archivos Btrfs. Ver btrfs-scrub(8)."
+    },
+    {
+      "parametro": "send",
+      "descripcion": "Envía datos de un subvolumen a stdout/archivo para respaldo. Ver btrfs-send(8)."
+    },
+    {
+      "parametro": "subvolume",
+      "descripcion": "Crea, elimina, lista y administra subvolúmenes Btrfs. Ver btrfs-subvolume(8). Subcomandos: create [-i <qgroupid>] <name> [<dest>], delete [-c|--commit-after] [-C|--commit-each] [-i|--subvolid <id>] <subvolume>..., find-new <subvolume> <lastgen>, get-default <path>, list [-o -a -p -c -g -u -q -R -s -r -d -t -G [+|-]<value> -C [+|-]<value> --sort=rootid,gen,ogen,path] <path>, set-default <id>|<path> <path>, show [-r <rootid>|-u <UUID>] <path>, snapshot [-r] [-i <qgroupid>] <source> <dest>|[<name>], sync [-s <seconds>] <path> [<subvolid>...]."
+    }
+  ],
+  "instalacion": {
+    "es_instalable": true,
+    "metodo_preferido": "gestor_paquetes",
+    "pasos": {
+      "debian_ubuntu": "sudo apt update && sudo apt install btrfs-progs -y",
+      "arch_linux": "sudo pacman -S btrfs-progs",
+      "rhel_centos": "sudo dnf install btrfs-progs -y"
+    }
+  },
+  "ejemplos": [
+    {
+      "uso": "btrfs subvolume create /mnt/mi_subvolumen",
+      "explicacion": "Crea un nuevo subvolumen llamado 'mi_subvolumen' dentro del punto de montaje /mnt."
+    },
+    {
+      "uso": "btrfs subvolume snapshot -r /mnt/subvol /mnt/snapshots/subvol_$(date +%Y%m%d)",
+      "explicacion": "Crea una snapshot de solo lectura del subvolumen '/mnt/subvol' con una fecha en el nombre."
+    },
+    {
+      "uso": "btrfs filesystem df /mnt",
+      "explicacion": "Muestra un resumen de la asignación de espacio del sistema de archivos montado en /mnt."
+    },
+    {
+      "uso": "btrfs device add /dev/sdb /mnt",
+      "explicacion": "Añade el dispositivo /dev/sdb al sistema de archivos Btrfs montado en /mnt."
+    },
+    {
+      "uso": "btrfs balance start -dconvert=raid1 -mconvert=raid1 /mnt",
+      "explicacion": "Reequilibra el sistema de archivos convirtiendo datos y metadatos al perfil RAID1."
+    },
+    {
+      "uso": "btrfs scrub start /mnt",
+      "explicacion": "Inicia un scrub (verificación de integridad) en el sistema de archivos montado en /mnt."
+    }
+  ]
+}

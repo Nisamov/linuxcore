@@ -2,7 +2,8 @@
   <img src=".github/media/top.png" alt="LinuxCore Header" width="100%">
 </p>
 <div align="center">
-<h1>LinuxCore</h1>
+
+# Linux Core
 
 [![MIT License](https://img.shields.io/github/license/nisamov/linuxcore?style=flat-square)](LICENSE) [![Website](https://img.shields.io/badge/website-linuxcore.site-blue?style=flat-square)](https://linuxcore.site/) [![Last Updated](https://img.shields.io/github/last-commit/nisamov/linuxcore?style=flat-square)](https://github.com/nisamov/linuxcore/commits) [![Repository Size](https://img.shields.io/github/repo-size/nisamov/linuxcore?style=flat-square)](.)
 
@@ -26,8 +27,6 @@ El proyecto genera automáticamente bases de datos estructuradas en formato JSON
 - **Búsqueda Avanzada**: Capacidad de búsqueda por etiquetas, categorías y dependencias
 
 La base de datos se actualiza automáticamente con cada contribución, manteniendo la integridad y consistencia de toda la documentación.
-
----
 
 ## Contenido
 
@@ -57,46 +56,6 @@ Esta documentación está organizada en los siguientes dominios principales:
 - **Ofensiva**: Pruebas de Penetración, Técnicas de Explotación
 - **Forense y Análisis**: Análisis de procesos, servicios e investigación de memoria
 - **Cumplimiento y Estándares**: Cumplimiento de estandares de seguridad informática
-
----
-
-## Estructura de los comandos
-
-Esta es la estructura del cuerpo de los comandos en formato `json`:
-```json
-{
-  "comando": "commando", // "ls"
-  "descripcion": "Descripcion técnica", // "Lista los archivos de la ruta especificada"
-  "categoria": "categoria interna", // "comandos", "archivos"
-  "estructura": "comando [opciones]", // "ls [opciones]"
-  "opciones": [
-    {
-      "parametro": "-h", // "-l", "--list"
-      "descripcion": "Muestra la ayuda del comando." // "Lista todos los elementos de forma ordenada"
-    },
-    {
-      "parametro": "-r", // "-a", "--all"
-      "descripcion": "Eliminacion de sector." // "Muestra todo sin ignorar las entradas '.' y '..'"
-    }
-  ],
-  "instalacion": {
-    "es_instalable": true,
-    "metodo_preferido": "gestor_paquetes",
-    "pasos": {
-      "debian_ubuntu": "sudo apt update && sudo apt install comando -y",
-      "arch_linux": "sudo pacman -S comando",
-      "rhel_centos": "sudo dnf install comando -y"
-    }
-  },
-  "ejemplos": [
-    {
-      "uso": "sudo comando -h",
-      "explicacion": "Muestra por consola la ayuda del comando."
-    }
-  ]
-}
-```
-Estando en este formato, es posible filtras los comandos según sus parámetros, categoría o relaciones internas.
 
 > [!IMPORTANT]
 > El proyecto dispone de una plataforma web oficial accesible en https://linuxcore.site/. Dicha plataforma sincroniza su base de datos directamente con este repositorio, aplicando las actualizaciones de forma automática tras cada contribución para garantizar la disponibilidad inmediata del contenido más reciente.
