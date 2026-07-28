@@ -1,7 +1,7 @@
 {
   "comando": "rsync",
   "descripcion": "Una herramienta rápida, versátil y remota (y local) para copiar archivos que minimiza la transferencia de datos mediante el algoritmo de delta-transferencia.",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "rsync [opciones] origen destino",
   "opciones": [
     {

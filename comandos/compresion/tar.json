@@ -1,7 +1,7 @@
 {
   "comando": "tar",
   "descripcion": "Almacena, extrae y manipula archivos de archivo (tarballs), permitiendo empaquetar múltiples archivos y directorios en uno solo, con o sin compresión.",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "tar [opciones] [archivo_tar] [archivos_o_directorios]",
   "opciones": [
     {

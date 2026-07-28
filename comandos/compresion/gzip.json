@@ -1,7 +1,7 @@
 {
   "comando": "gzip",
   "descripcion": "Comprimir o descomprimir archivos utilizando la codificación LZ77 (por defecto, comprime los archivos reemplazando el original).",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "gzip [opciones] [archivo...]",
   "opciones": [
     {

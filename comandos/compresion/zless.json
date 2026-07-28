@@ -1,7 +1,7 @@
 {
   "comando": "zless",
   "descripcion": "Un filtro que permite examinar archivos de texto comprimidos (mediante gzip, bzip2, xz, etc.) una pantalla a la vez en la terminal, funcionando como un visor interactivo sin necesidad de descomprimir el archivo previamente en el disco.",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "zless [archivos]",
   "opciones": [
     {

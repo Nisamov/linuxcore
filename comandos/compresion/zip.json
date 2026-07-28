@@ -1,7 +1,7 @@
 {
   "comando": "zip",
   "descripcion": "Empaquetar y comprimir (archivar) archivos en el formato estándar ZIP, compatible con múltiples plataformas.",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "zip [opciones] archivo.zip [archivos_o_directorios_a_incluir]",
   "opciones": [
     {

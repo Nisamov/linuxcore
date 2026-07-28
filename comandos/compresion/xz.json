@@ -1,7 +1,7 @@
 {
   "comando": "xz",
   "descripcion": "Comprimir o descomprimir archivos usando el algoritmo LZMA2, ofreciendo una tasa de compresión muy alta a costa de un mayor uso de memoria y tiempo de CPU.",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "xz [opciones] [archivos]",
   "opciones": [
     {

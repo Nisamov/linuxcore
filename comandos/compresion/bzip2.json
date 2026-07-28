@@ -1,7 +1,7 @@
 {
   "comando": "bzip2",
   "descripcion": "Comprimir archivos usando el algoritmo 'Burrows-Wheeler' y codificación 'Huffman'.",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "bzip2 [opciones]",
   "opciones": [
     {

@@ -1,7 +1,7 @@
 {
   "comando": "dd",
   "descripcion": "Copiar un archivo, convirtiendo y formateando según las opciones suministradas.",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "dd [operandos]",
   "opciones": [
     {

@@ -1,7 +1,7 @@
 {
   "comando": "unzip",
   "descripcion": "Listar, probar y extraer archivos comprimidos en formato ZIP.",
-  "categoria": ["commands", "compression"],
+  "categoria": ["compresion"],
   "estructura": "unzip [opciones] archivo.zip [archivos_a_extraer] [-x archivos_excluidos] [-d directorio_destino]",
   "opciones": [
     {
