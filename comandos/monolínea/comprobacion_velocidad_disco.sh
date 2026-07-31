@@ -1,0 +1,1 @@
+dd if=/dev/zero of=test bs=1G count=1 oflag=dsync
