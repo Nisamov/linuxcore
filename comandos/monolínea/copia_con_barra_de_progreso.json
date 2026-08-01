@@ -1,7 +1,5 @@
-[
-    {
+{
     "nombre": "Copia con barra de progreso",
     "descripcion": "Realiza una copia de archivos mostrando el progreso",
     "contenido": "rsync -ah --progress $1 $2"
-    }
-]
+}

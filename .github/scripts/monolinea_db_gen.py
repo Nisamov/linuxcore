@@ -11,9 +11,13 @@ entries = []
 for filepath in glob.glob(os.path.join(scripts_dir, "*.json")):
     with open(filepath, "r", encoding="utf-8") as f:
         data = json.load(f)
+    if isinstance(data, list):
+        if len(data) == 0:
+            continue
+        data = data[0]
     nombre = data.get("nombre", os.path.basename(filepath).replace(".json", ""))
     descripcion = data.get("descripcion", "")
-    comando = data.get("comando", "")
+    comando = data.get("contenido", "")
     entries.append({
         "nombre": nombre,
         "descripcion": descripcion,

@@ -1,7 +1,5 @@
-[
-    {
+{
     "nombre": "Recargar configuración del shell",
     "descripcion": "Recarga la configuración del shell actual",
     "contenido": "source ~/.bashrc"
-    }
-]
+}

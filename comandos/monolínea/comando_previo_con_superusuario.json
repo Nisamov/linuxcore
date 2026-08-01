@@ -1,7 +1,5 @@
-[
-    {
+{
     "nombre": "Comando previo con superusuario",
     "descripcion": "Ejecuta el último comando con privilegios de superusuario.",
     "contenido": "sudo !!"
-    }
-]
+}
