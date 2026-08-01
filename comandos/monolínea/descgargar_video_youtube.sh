@@ -1,1 +1,1 @@
-yt-dlp url
+yt-dlp $1

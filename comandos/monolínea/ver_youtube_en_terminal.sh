@@ -1,1 +1,1 @@
-mpv url
+mpv $1

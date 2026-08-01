@@ -1,1 +1,1 @@
-rsync -ah --progress origen destino
+rsync -ah --progress $1 $2

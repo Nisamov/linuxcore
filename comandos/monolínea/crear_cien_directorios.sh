@@ -1,1 +1,1 @@
-mkdir directorio{01..100}
+mkdir $1{01..100}

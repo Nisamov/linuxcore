@@ -1,1 +1,1 @@
-commando -v cmd >/dev/null && echo "El comando 'cmd' existe en el sistema." || echo "El comando 'cmd' no existe en el sistema."
+command -v $1 >/dev/null && echo "El comando existe en el sistema." || echo "El comando no existe en el sistema."
