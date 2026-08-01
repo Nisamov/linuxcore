@@ -1,42 +1,62 @@
 [
   {
     "nombre": "Copia Con Barra De Progreso",
-    "ruta": "comandos/monolínea/copia_con_barra_de_progreso.sh"
+    "ruta": "comandos/monolínea/copia_con_barra_de_progreso.sh",
+    "descripcion": "comandos/monolínea/copia_con_barra_de_progreso.sh",
+    "contenido": "rsync -ah --progress origen destino"
   },
   {
     "nombre": "Comando Previo",
-    "ruta": "comandos/monolínea/comando_previo.sh"
+    "ruta": "comandos/monolínea/comando_previo.sh",
+    "descripcion": "comandos/monolínea/comando_previo.sh",
+    "contenido": "!!"
   },
   {
     "nombre": "Crear Cien Directorios",
-    "ruta": "comandos/monolínea/crear_cien_directorios.sh"
+    "ruta": "comandos/monolínea/crear_cien_directorios.sh",
+    "descripcion": "comandos/monolínea/crear_cien_directorios.sh",
+    "contenido": "mkdir directorio{01..100}"
   },
   {
     "nombre": "Ver Youtube En Terminal",
-    "ruta": "comandos/monolínea/ver_youtube_en_terminal.sh"
+    "ruta": "comandos/monolínea/ver_youtube_en_terminal.sh",
+    "descripcion": "comandos/monolínea/ver_youtube_en_terminal.sh",
+    "contenido": "mpv url"
   },
   {
     "nombre": "Revisar Existencia Comando",
-    "ruta": "comandos/monolínea/revisar_existencia_comando.sh"
+    "ruta": "comandos/monolínea/revisar_existencia_comando.sh",
+    "descripcion": "comandos/monolínea/revisar_existencia_comando.sh",
+    "contenido": "commando -v cmd >/dev/null && echo \"El comando 'cmd' existe en el sistema.\" || echo \"El comando 'cmd' no existe en el sistema.\""
   },
   {
     "nombre": "Descgargar Video Youtube",
-    "ruta": "comandos/monolínea/descgargar_video_youtube.sh"
+    "ruta": "comandos/monolínea/descgargar_video_youtube.sh",
+    "descripcion": "comandos/monolínea/descgargar_video_youtube.sh",
+    "contenido": "yt-dlp url"
   },
   {
     "nombre": "Mostrar Clima",
-    "ruta": "comandos/monolínea/mostrar_clima.sh"
+    "ruta": "comandos/monolínea/mostrar_clima.sh",
+    "descripcion": "comandos/monolínea/mostrar_clima.sh",
+    "contenido": "curl wttr.in"
   },
   {
     "nombre": "Comprobacion Velocidad Disco",
-    "ruta": "comandos/monolínea/comprobacion_velocidad_disco.sh"
+    "ruta": "comandos/monolínea/comprobacion_velocidad_disco.sh",
+    "descripcion": "comandos/monolínea/comprobacion_velocidad_disco.sh",
+    "contenido": "dd if=/dev/zero of=test bs=1G count=1 oflag=dsync"
   },
   {
     "nombre": "Comando Previo Con Superusuario",
-    "ruta": "comandos/monolínea/comando_previo_con_superusuario.sh"
+    "ruta": "comandos/monolínea/comando_previo_con_superusuario.sh",
+    "descripcion": "comandos/monolínea/comando_previo_con_superusuario.sh",
+    "contenido": "sudo !!"
   },
   {
     "nombre": "Recargar Configuracion Shell",
-    "ruta": "comandos/monolínea/recargar_configuracion_shell.sh"
+    "ruta": "comandos/monolínea/recargar_configuracion_shell.sh",
+    "descripcion": "comandos/monolínea/recargar_configuracion_shell.sh",
+    "contenido": "source ~/.bashrc"
   }
 ]
