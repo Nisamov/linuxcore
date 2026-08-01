@@ -3,7 +3,7 @@
     "nombre": "Copia Con Barra De Progreso",
     "ruta": "comandos/monolínea/copia_con_barra_de_progreso.sh",
     "descripcion": "comandos/monolínea/copia_con_barra_de_progreso.sh",
-    "contenido": "rsync -ah --progress origen destino"
+    "contenido": "rsync -ah --progress $1 $2"
   },
   {
     "nombre": "Comando Previo",
@@ -15,25 +15,25 @@
     "nombre": "Crear Cien Directorios",
     "ruta": "comandos/monolínea/crear_cien_directorios.sh",
     "descripcion": "comandos/monolínea/crear_cien_directorios.sh",
-    "contenido": "mkdir directorio{01..100}"
+    "contenido": "mkdir $1{01..100}"
   },
   {
     "nombre": "Ver Youtube En Terminal",
     "ruta": "comandos/monolínea/ver_youtube_en_terminal.sh",
     "descripcion": "comandos/monolínea/ver_youtube_en_terminal.sh",
-    "contenido": "mpv url"
+    "contenido": "mpv $1"
   },
   {
     "nombre": "Revisar Existencia Comando",
     "ruta": "comandos/monolínea/revisar_existencia_comando.sh",
     "descripcion": "comandos/monolínea/revisar_existencia_comando.sh",
-    "contenido": "commando -v cmd >/dev/null && echo \"El comando 'cmd' existe en el sistema.\" || echo \"El comando 'cmd' no existe en el sistema.\""
+    "contenido": "command -v $1 >/dev/null && echo \"El comando existe en el sistema.\" || echo \"El comando no existe en el sistema.\""
   },
   {
     "nombre": "Descgargar Video Youtube",
     "ruta": "comandos/monolínea/descgargar_video_youtube.sh",
     "descripcion": "comandos/monolínea/descgargar_video_youtube.sh",
-    "contenido": "yt-dlp url"
+    "contenido": "yt-dlp $1"
   },
   {
     "nombre": "Mostrar Clima",
