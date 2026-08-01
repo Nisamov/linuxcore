@@ -1,0 +1,7 @@
+[
+    {
+    "nombre": "Comprobación de velocidad de disco",
+    "descripcion": "Verifica la velocidad de escritura del disco",
+    "contenido": "dd if=/dev/zero of=test bs=1G count=1 oflag=dsync"
+    }
+]

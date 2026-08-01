@@ -1,0 +1,7 @@
+[
+    {
+    "nombre": "Ver video de YouTube en terminal",
+    "descripcion": "Reproduce un video de YouTube en el terminal utilizando mpv",
+    "contenido": "mpv $1"
+    }
+]

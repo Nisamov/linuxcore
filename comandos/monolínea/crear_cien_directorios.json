@@ -1,0 +1,7 @@
+[
+    {
+    "nombre": "Crear cien directorios",
+    "descripcion": "Crea cien directorios con nombres secuenciales",
+    "contenido": "mkdir $1{01..100}"
+    }
+]

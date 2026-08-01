@@ -1,0 +1,7 @@
+[
+    {
+    "nombre": "Mostrar clima",
+    "descripcion": "Muestra la información del clima para la ubicación actual",
+    "contenido": "curl wttr.in"
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+    "nombre": "Descargar video de YouTube",
+    "descripcion": "Descarga un video de YouTube utilizando yt-dlp",
+    "contenido": "yt-dlp $1"
+    }
+]

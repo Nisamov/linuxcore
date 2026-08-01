@@ -1,0 +1,7 @@
+[
+    {
+    "nombre": "Comando previo",
+    "descripcion": "Ejecuta el último comando.",
+    "contenido": "!!"
+    }
+]
