@@ -3,7 +3,7 @@ name: Generar base de datos para monolineas
 on:
   push:
     paths:
-      - 'comandos/monolínea/*.sh'
+      - 'comandos/monolínea/*.json'
   workflow_dispatch:
 
 permissions:
