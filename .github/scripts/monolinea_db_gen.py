@@ -14,12 +14,15 @@ for filepath in glob.glob(os.path.join(scripts_dir, "*.sh")):
     name = filename.replace(".sh", "").replace("_", " ").title()
     with open(filepath, "r", encoding="utf-8") as f:
         contenido = f.read()
+    ruta_relativa = os.path.relpath(filepath, base_dir)
     entries.append({
         "nombre": name,
-        "ruta": os.path.relpath(filepath, base_dir),
+        "ruta": ruta_relativa,
+        "descripcion": ruta_relativa,
         "contenido": contenido
     })
 
 os.makedirs(os.path.dirname(output_file), exist_ok=True)
 with open(output_file, "w", encoding="utf-8") as f:
     json.dump(entries, f, indent=2, ensure_ascii=False)
+print(f"Generado {output_file} con {len(entries)} scripts.")
