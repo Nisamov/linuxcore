@@ -1,0 +1,42 @@
+[
+  {
+    "nombre": "Copia Con Barra De Progreso",
+    "ruta": "comandos/monolínea/copia_con_barra_de_progreso.sh"
+  },
+  {
+    "nombre": "Comando Previo",
+    "ruta": "comandos/monolínea/comando_previo.sh"
+  },
+  {
+    "nombre": "Crear Cien Directorios",
+    "ruta": "comandos/monolínea/crear_cien_directorios.sh"
+  },
+  {
+    "nombre": "Ver Youtube En Terminal",
+    "ruta": "comandos/monolínea/ver_youtube_en_terminal.sh"
+  },
+  {
+    "nombre": "Revisar Existencia Comando",
+    "ruta": "comandos/monolínea/revisar_existencia_comando.sh"
+  },
+  {
+    "nombre": "Descgargar Video Youtube",
+    "ruta": "comandos/monolínea/descgargar_video_youtube.sh"
+  },
+  {
+    "nombre": "Mostrar Clima",
+    "ruta": "comandos/monolínea/mostrar_clima.sh"
+  },
+  {
+    "nombre": "Comprobacion Velocidad Disco",
+    "ruta": "comandos/monolínea/comprobacion_velocidad_disco.sh"
+  },
+  {
+    "nombre": "Comando Previo Con Superusuario",
+    "ruta": "comandos/monolínea/comando_previo_con_superusuario.sh"
+  },
+  {
+    "nombre": "Recargar Configuracion Shell",
+    "ruta": "comandos/monolínea/recargar_configuracion_shell.sh"
+  }
+]
