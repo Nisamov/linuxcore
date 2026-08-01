@@ -1,35 +1,35 @@
-name: Generar base de datos para monolineas
+name: Generación bases de datos
 
 on:
   push:
     paths:
-      - 'comandos/monolínea/*.sh'
+      - 'commands/**'
+      - 'services/**'
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  generate:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
 
-      - name: Setup Python
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.x'
 
-      - name: Run script
-        run: python .github/scripts/monolinea_db_gen.py
+      - name: Base de datos de comandos
+        run: python .github/scripts/commands_db_gen.py
 
-      - name: Commit and push if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .github/db/monolinea.json
-          git diff --staged --quiet || git commit -m "Actualización monolinea.json"
-          git push origin HEAD:${{ github.ref }}
+      - name: Base de datos de servicios
+        run: python .github/scripts/services_db_gen.py
+
+      - name: Commit y publicar
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: actualización automática de bases de datos"
+          file_pattern: '.github/db/*.json'
