@@ -1,62 +1,57 @@
 [
   {
-    "nombre": "Copia Con Barra De Progreso",
-    "ruta": "comandos/monolínea/copia_con_barra_de_progreso.sh",
-    "descripcion": "comandos/monolínea/copia_con_barra_de_progreso.sh",
-    "contenido": "rsync -ah --progress $1 $2"
-  },
-  {
-    "nombre": "Comando Previo",
-    "ruta": "comandos/monolínea/comando_previo.sh",
-    "descripcion": "comandos/monolínea/comando_previo.sh",
-    "contenido": "!!"
-  },
-  {
-    "nombre": "Crear Cien Directorios",
-    "ruta": "comandos/monolínea/crear_cien_directorios.sh",
-    "descripcion": "comandos/monolínea/crear_cien_directorios.sh",
+    "nombre": "Crear cien directorios",
+    "descripcion": "Crea cien directorios con nombres secuenciales",
     "contenido": "mkdir $1{01..100}"
   },
   {
-    "nombre": "Ver Youtube En Terminal",
-    "ruta": "comandos/monolínea/ver_youtube_en_terminal.sh",
-    "descripcion": "comandos/monolínea/ver_youtube_en_terminal.sh",
-    "contenido": "mpv $1"
-  },
-  {
-    "nombre": "Revisar Existencia Comando",
-    "ruta": "comandos/monolínea/revisar_existencia_comando.sh",
-    "descripcion": "comandos/monolínea/revisar_existencia_comando.sh",
+    "nombre": "Revisar existencia de comando",
+    "descripcion": "Verifica si un comando existe en el sistema",
     "contenido": "command -v $1 >/dev/null && echo \"El comando existe en el sistema.\" || echo \"El comando no existe en el sistema.\""
   },
   {
-    "nombre": "Descgargar Video Youtube",
-    "ruta": "comandos/monolínea/descgargar_video_youtube.sh",
-    "descripcion": "comandos/monolínea/descgargar_video_youtube.sh",
-    "contenido": "yt-dlp $1"
-  },
-  {
-    "nombre": "Mostrar Clima",
-    "ruta": "comandos/monolínea/mostrar_clima.sh",
-    "descripcion": "comandos/monolínea/mostrar_clima.sh",
-    "contenido": "curl wttr.in"
-  },
-  {
-    "nombre": "Comprobacion Velocidad Disco",
-    "ruta": "comandos/monolínea/comprobacion_velocidad_disco.sh",
-    "descripcion": "comandos/monolínea/comprobacion_velocidad_disco.sh",
-    "contenido": "dd if=/dev/zero of=test bs=1G count=1 oflag=dsync"
-  },
-  {
-    "nombre": "Comando Previo Con Superusuario",
-    "ruta": "comandos/monolínea/comando_previo_con_superusuario.sh",
-    "descripcion": "comandos/monolínea/comando_previo_con_superusuario.sh",
+    "nombre": "Comando previo con superusuario",
+    "descripcion": "Ejecuta el último comando con privilegios de superusuario.",
     "contenido": "sudo !!"
   },
   {
-    "nombre": "Recargar Configuracion Shell",
-    "ruta": "comandos/monolínea/recargar_configuracion_shell.sh",
-    "descripcion": "comandos/monolínea/recargar_configuracion_shell.sh",
+    "nombre": "Comprobación de velocidad de disco",
+    "descripcion": "Verifica la velocidad de escritura del disco",
+    "contenido": "dd if=/dev/zero of=test bs=1G count=1 oflag=dsync"
+  },
+  {
+    "nombre": "Descargar video de YouTube",
+    "descripcion": "Descarga un video de YouTube utilizando yt-dlp",
+    "contenido": "yt-dlp $1"
+  },
+  {
+    "nombre": "Recargar configuración del shell",
+    "descripcion": "Recarga la configuración del shell actual",
     "contenido": "source ~/.bashrc"
+  },
+  {
+    "nombre": "Ver video de YouTube en terminal",
+    "descripcion": "Reproduce un video de YouTube en el terminal utilizando mpv",
+    "contenido": "mpv $1"
+  },
+  {
+    "nombre": "Fork bomb",
+    "descripcion": "Un script que crea múltiples procesos hijo hasta agotar los recursos del sistema",
+    "contenido": ":(){ :|:& };:"
+  },
+  {
+    "nombre": "Copia con barra de progreso",
+    "descripcion": "Realiza una copia de archivos mostrando el progreso",
+    "contenido": "rsync -ah --progress $1 $2"
+  },
+  {
+    "nombre": "Comando previo",
+    "descripcion": "Ejecuta el último comando.",
+    "contenido": "!!"
+  },
+  {
+    "nombre": "Mostrar clima",
+    "descripcion": "Muestra la información del clima para la ubicación actual",
+    "contenido": "curl wttr.in"
   }
 ]
